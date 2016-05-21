@@ -44,6 +44,7 @@ module.exports = function(RED) {
 
 		var node = this;
 		
+		// test
         // if there is an new input
 		node.on('input', function(msg) {
 			
@@ -63,7 +64,7 @@ module.exports = function(RED) {
         		if (node.filename) {
              		cl += " "+node.filename;	        			        				
         		} else {
-             		cl += " "+"picture";	        			
+             		cl += " "+"pic_"+uuid;	        			
         		}
         	}
 
