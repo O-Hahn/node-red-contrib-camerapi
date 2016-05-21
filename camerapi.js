@@ -55,6 +55,7 @@ module.exports = function(RED) {
             var detect;
             var resolution;
             var facesize;
+            var fileformat;
 
          	node.status({fill:"green",shape:"dot",text:"node-red:common.status.connected"});
 
@@ -69,12 +70,15 @@ module.exports = function(RED) {
         	}
 
          	if ((msg.fileformat) && (msg.fileformat.trim() !== "")) {
-     			cl += " "+msg.fileformat;	
+     			cl += " "+msg.fileformat;
+     			fileformat = msg.fileformat;
          	} else {
          		if (node.fileformat) {
-         			cl += " "+node.fileformat;	        			        				
+         			cl += " "+node.fileformat;
+         			fileformat = node.fileformat;
          		} else {
-         			cl += " "+"jpg";	        			
+         			cl += " "+"jpg";	        
+         			fileformat = "jpg";
          		}
          	}
          	
@@ -152,11 +156,11 @@ module.exports = function(RED) {
                     //console.log('[exec] error: ' + error);
                 }
                 
-                msg.payload = "/home/pi/Git/face/image/"+filename+"."+fileformat;
+                msg.payload = "/home/pi/Git/face/image/"+msg.filename+"."+fileformat;
                 msg.faces = [];
                 if (detect == "1") {
                 	for (var i = 1; i <= msg.facecount; i++) {
-                		msg.faces.push("/home/pi/Git/face/image/"+filename+i.toString()+"."+fileformat);
+                		msg.faces.push("/home/pi/Git/face/image/"+msg.filename+i.toString()+"."+fileformat);
                 	}
                 }
                 node.status({});
