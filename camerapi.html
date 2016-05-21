@@ -1,0 +1,103 @@
+<!--
+  Copyright 2016 IBM Corp.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  Authors:
+     - Olaf Hahn
+     - Lars Probst
+     - Ansgar Schmidt
+-->
+
+
+<!-- CameraPi Take Photo -->
+<script type="text/x-red" data-template-name="camerapi-takephoto">
+    <div class="form-row node-input-filename">
+         <label for="node-input-filename"><i class="fa fa-tag"></i> <span data-i18n="camerapi.label.filename"></span></label>
+		<input type="text" id="node-input-filename">
+    </div>
+    <div class="form-row node-input-fileformat">
+         <label for="node-input-fileformat"><i class="fa fa-simel-o"></i> <span data-i18n="camerapi.label.fileformat"></span></label>
+	     <select id="node-input-fileformat">
+            <option value="jpg">JPG</option>
+            <option value="png">PNG</option>
+        </select>
+    </div>
+    <div class="form-row node-input-resolution">
+         <label for="node-input-resolution"><i class="fa fa-fa-camera"></i> <span data-i18n="camerapi.label.resolution"></span></label>
+	     <select id="node-input-resolution">
+            <option value="1">320x240</option>
+            <option value="2">640x480</option>
+            <option value="3">800x600</option>
+            <option value="4">1024x768</option>
+		</select>
+    </div>
+    <div class="form-row node-input-detectfaces">
+         <label for="node-input-detectfaces"><i class="fa fa-simel-o"></i> <span data-i18n="camerapi.label.detectfaces"></span></label>
+	     <select id="node-input-detectfaces">
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+        </select>
+    </div>
+    <div id="facesize" class="form-row node-input-facesize">
+         <label for="node-input-facesize"><i class="fa fa-simel-o"></i> <span data-i18n="camerapi.label.facesize"></span></label>
+	     <select id="node-input-facesize">
+            <option value="1">15x20 px</option>
+            <option value="2">20x25 px</option>
+            <option value="3">25x30 px</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="speakerpi.label.name"></span></label>
+        <input type="text" id="node-input-name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="camerapi-takephoto">
+    <p>This Camera Pi Node for Raspberry PI takes a photo with the given resolution. </p>
+    <p>In <b>msg.filename</b> could the existing filename including path be overwritten </p>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('camerapi-takephoto',{
+        category: 'Raspberry_Pi',
+        color: '#A6BBCF',
+        defaults: {
+            filename: {value:"", required:true},
+            fileformat: {value:"", required:true},
+            resolution: {value:"1", required:true},
+            detectfaces: {value:"1", required:true},
+            facesize: {value:"1", required:true},
+            name: {value:""}
+        },
+        inputs:1,
+        outputs:0,
+        icon: "photo.png",
+        oneditprepare: function() {
+            $("#node-input-detectfaces").change(function() {
+                var choose = $("#node-input-detectfaces").val();
+                console.log(choose);
+                if (choose == "1") {
+                	console.log("yes");
+                	$("#facesize").show();
+                } else {
+                	console.log("no");
+                	$("#facesize").hide();
+                }
+            });
+        },
+        label: function() {
+            return this.name || "camerapi take photo node";
+        }
+    });
+</script>
+<!-- End of camerapi Pi Take Photo Node -->

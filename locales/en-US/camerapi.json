@@ -1,0 +1,20 @@
+{
+    "camerapi": {
+        "label": {
+            "camerapi": "CameraPi",
+            "filename": "File Name",
+            "size": "Image Resolution", 
+            "facesize" : "Face min size",
+            "detect" : "Detect Faces",
+            "fileformat": "File Format",
+            "res1":"320x240",
+            "res2":"640x480",
+            "res3":"800x600",
+            "res4":"1024x768",
+            "name": "Name",
+            "none": "none"
+        },
+       "errors": {
+        }
+    }
+}
