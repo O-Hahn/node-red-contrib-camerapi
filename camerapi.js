@@ -44,7 +44,6 @@ module.exports = function(RED) {
 
 		var node = this;
 		
-		// test
         // if there is an new input
 		node.on('input', function(msg) {
 			
@@ -56,31 +55,43 @@ module.exports = function(RED) {
             var resolution;
             var facesize;
             var fileformat;
+            var filename;
+            var filepath;
 
          	node.status({fill:"green",shape:"dot",text:"node-red:common.status.connected"});
 
          	if ((msg.filename) && (msg.filename.trim() !== "")) {
-         			cl += " "+msg.filename;	
+         			filename = msg.filename;
         	} else {
         		if (node.filename) {
-             		cl += " "+node.filename;	        			        				
+             		filename = node.filename;
         		} else {
-             		cl += " "+"pic_"+uuid;	        			
+             		filename = "pic_" + uuid;
         		}
         	}
+ 			cl += " "+filename;
 
+         	if ((msg.filepath) && (msg.filepath.trim() !== "")) {
+     			filepath = msg.filepath;
+         	} else {
+         		if (node.filepath) {
+         			filepath = node.filepath;
+         		} else {
+         			filepath = "/home/pi/faces";
+         		}
+         	}
+ 			cl += " "+filepath;
+     		
          	if ((msg.fileformat) && (msg.fileformat.trim() !== "")) {
-     			cl += " "+msg.fileformat;
      			fileformat = msg.fileformat;
          	} else {
          		if (node.fileformat) {
-         			cl += " "+node.fileformat;
          			fileformat = node.fileformat;
          		} else {
-         			cl += " "+"jpg";	        
          			fileformat = "jpg";
          		}
          	}
+ 			cl += " "+fileformat;
          	
          	if ((msg.resolution) && (msg.resolution !== "")) {
          		resolution = msg.resolution; 
@@ -91,7 +102,6 @@ module.exports = function(RED) {
                  		resolution = "1";	        			         					
          			}
             	}
-
          	if (resolution == "1") {
              	cl += " 320 240"; 
          	} else if (resolution == "2" ) {
@@ -103,17 +113,15 @@ module.exports = function(RED) {
          	}
 
          	if ((msg.detectfaces) && (msg.detectfaces !== "")) {
-         		cl += " " + msg.detectfaces;
          		detect = msg.detectfaces;
          	} else {
          		if (node.detectfaces) {
-             		cl += " " + node.detectfaces;
              		detect = node.detectfaces;
          		} else {
-             		cl += " "+"0";
              		detect = "0";
          		}
          	}
+     		cl += " " + detect;
 
          	if ((msg.facesize) && (msg.facesize !== "")) {
          		facesize = msg.facesize; 
@@ -124,7 +132,6 @@ module.exports = function(RED) {
              		facesize = "1";	      
              		}
          	}
-
          	if (facesize == "1") {
              	cl += " 15 20"; 
          	} else if (resolution == "2" ) {
@@ -144,9 +151,12 @@ module.exports = function(RED) {
                 }
                 
                 if (detect == "1") {
-                	msg.facecount = parseInt(retval);
+                    if (RED.settings.verbose) { node.log(retval); }
+                	//msg.facecount = parseInt(retval);
+                	msg.facecount = 5;
                 }
                 
+                // check error 
                 var msg2 = {payload:stderr};
                 var msg3 = null;
                 //console.log('[exec] stdout: ' + stdout);
@@ -154,15 +164,20 @@ module.exports = function(RED) {
                 if (error !== null) {
                     msg3 = {payload:error};
                     //console.log('[exec] error: ' + error);
+                    msg.payload = "";
+                    msg.filename = "";
+                    msg.faces = [];
+                } else {
+                    msg.payload = filepath+filename+"."+fileformat;
+                    msg.filename = filename+"."+fileformat;
+                    msg.faces = [];
+                    if (detect == "1") {
+                    	for (var i = 1; i <= msg.facecount; i++) {
+                    		msg.faces.push(filepath+filename+i.toString()+"."+fileformat);
+                    	}
+                    }                	
                 }
                 
-                msg.payload = "/home/pi/Git/face/image/"+msg.filename+"."+fileformat;
-                msg.faces = [];
-                if (detect == "1") {
-                	for (var i = 1; i <= msg.facecount; i++) {
-                		msg.faces.push("/home/pi/Git/face/image/"+msg.filename+i.toString()+"."+fileformat);
-                	}
-                }
                 node.status({});
                 node.send(msg);
                 delete node.activeProcesses[child.pid];
@@ -172,18 +187,6 @@ module.exports = function(RED) {
             
             node.activeProcesses[child.pid] = child;
          	
-			// check if speech is filled or standard-sound given
-            node.status({fill:"green",shape:"ring",text:"node-red:common.status.connected"});
-        });
-         	
-        // SpeakerPi is ready
-        node.on('ready', function() {
-            node.status({fill:"green",shape:"ring",text:"node-red:common.status.connected"});
-        });
-        
-        // SpeakerPi is closed
-        node.on('closed', function() {
-            node.status({fill:"red",shape:"ring",text:"node-red:common.status.not-connected"});
         });
             
         // SpeakerPi has a close 

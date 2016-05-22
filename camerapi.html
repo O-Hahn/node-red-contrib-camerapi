@@ -25,6 +25,17 @@
          <label for="node-input-filename"><i class="fa fa-tag"></i> <span data-i18n="camerapi.label.filename"></span></label>
 		<input type="text" id="node-input-filename">
     </div>
+    <div class="form-row node-input-filedefpath">
+         <label for="node-input-filedefpath"><i class="fa fa-tag"></i> <span data-i18n="camerapi.label.filedefpath"></span></label>
+	     <select id="node-input-filedefpath">
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+        </select>
+    </div>
+    <div id="filepath" class="form-row node-input-filepath>
+         <label for="node-input-filepath"><i class="fa fa-tag"></i> <span data-i18n="camerapi.label.filepath"></span></label>
+		<input type="text" id="node-input-filepath">
+    </div>
     <div class="form-row node-input-fileformat">
          <label for="node-input-fileformat"><i class="fa fa-tag"></i> <span data-i18n="camerapi.label.fileformat"></span></label>
 	     <select id="node-input-fileformat">
@@ -64,7 +75,11 @@
 
 <script type="text/x-red" data-help-name="camerapi-takephoto">
     <p>This Camera Pi Node for Raspberry PI takes a photo with the given resolution. </p>
-    <p>In <b>msg.filename</b> could the existing filename including path be overwritten </p>
+    <p>You could override with <b>msg.filename</b> the filename, with <b>msg.filepath</b> the filepath.</p>
+	<p> </p>
+	<p>The node returns <b>msg.payload</b> with the full qualified filepath and filename to the photo with extension. </p>
+	<p>In <b>msg.facecount</b> you will get the count of detected faces.</p>
+	<p>If the <b>msg.facecount</b> is not 0 will in <b>msg.faces</b> be an array of filenames to the photoes of the extracted faces. </p>
 </script>
 
 <script type="text/javascript">
@@ -73,7 +88,9 @@
         color: '#A6BBCF',
         defaults: {
             filename: {value:"", required:true},
-            fileformat: {value:"", required:true},
+            filedefpath: {value:"0", required:true},
+            filepath: {value:"", required:true},
+            fileformat: {value:"jpg", required:true},
             resolution: {value:"1", required:true},
             detectfaces: {value:"1", required:true},
             facesize: {value:"1", required:true},
@@ -83,20 +100,31 @@
         outputs:1,
         icon: "photo.png",
         oneditprepare: function() {
+            $("#node-input-filedefpath").change(function() {
+                var choose = $("#node-input-filedefpath").val();
+                console.log(choose);
+                if (choose == "1") {
+                	console.log("FileDefPath - yes");
+                	$("#filepath").show();
+                } else {
+                	console.log("FileDefPath - no");
+                	$("#filepath").hide();
+                }
+            });
             $("#node-input-detectfaces").change(function() {
                 var choose = $("#node-input-detectfaces").val();
                 console.log(choose);
                 if (choose == "1") {
-                	console.log("yes");
+                	console.log("DetectFaces - yes");
                 	$("#facesize").show();
                 } else {
-                	console.log("no");
+                	console.log("DetectFaces - no");
                 	$("#facesize").hide();
                 }
             });
         },
         label: function() {
-            return this.name || "camerapi take photo node";
+            return this.name || "take photo node";
         }
     });
 </script>

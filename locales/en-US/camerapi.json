@@ -3,6 +3,8 @@
         "label": {
             "camerapi": "CameraPi",
             "filename": "File Name",
+            "filedefpath": "File default path", 
+            "filepath": "File Path", 
             "size": "Image Resolution", 
             "facesize" : "Face min size",
             "detect" : "Detect Faces",
