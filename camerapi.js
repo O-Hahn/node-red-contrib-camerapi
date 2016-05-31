@@ -35,10 +35,10 @@ module.exports = function(RED) {
         
         // set parameters and save locally 
 		this.filename =  config.filename;
+		this.filedefpath = config.filedefpath;
+		this.filepath = config.filepath;
 		this.fileformat = config.fileformat;
 		this.resolution =  config.resolution;
-		this.detectfaces = config.detectfaces;
-		this.facesize =  config.facesize;
 		this.name =  config.name;
 		this.activeProcesses = {};
 
@@ -50,10 +50,9 @@ module.exports = function(RED) {
          	var fs = require("fs-extra");
          	var uuid = require('node-uuid').v4();
         	var imagebuffer = require('stream').Readable;
-            var cl = "python /home/pi/Git/face/face_webcam.py";
-            var detect;
+         	var localdir = JSON.parse(require('fs').readFileSync(require('path').resolve(__dirname, 'settings.json'),'utf8'));
+            var cl = "python " + localdir + "/lib/face/get_photo.py";
             var resolution;
-            var facesize;
             var fileformat;
             var filename;
             var filepath;
@@ -77,7 +76,7 @@ module.exports = function(RED) {
          		if (node.filepath) {
          			filepath = node.filepath;
          		} else {
-         			filepath = "/home/pi/faces";
+         			filepath = localdir + "/images";
          		}
          	}
  			cl += " "+filepath;
@@ -111,35 +110,157 @@ module.exports = function(RED) {
          	} else  {
              	cl += " 1024 768";          		
          	}
+         	
+            if (RED.settings.verbose) { node.log(cl); }
+            
+            var child = exec(cl, {encoding: 'binary', maxBuffer:10000000}, function (error, stdout, stderr) {
+                var retval = new Buffer(stdout,"binary");
+                try {
+                    if (isUtf8(retval)) { retval = retval.toString(); }
+                } catch(e) {
+                    node.log(RED._("exec.badstdout"));
+                }
+                                
+                // check error 
+                var msg2 = {payload:stderr};
+                var msg3 = null;
+                //console.log('[exec] stdout: ' + stdout);
+                //console.log('[exec] stderr: ' + stderr);
+                if (error !== null) {
+                    msg3 = {payload:error};
+                    //console.log('[exec] error: ' + error);
+                    msg.payload = "";
+                    msg.filename = "";
+                } else {
+                    msg.payload = filepath+filename+"."+fileformat;
+                    msg.filename = filename+"."+fileformat;
+                }
+                
+                node.status({});
+                node.send(msg);
+                delete node.activeProcesses[child.pid];
+            });
+            
+            child.on('error',function(){});
+            
+            node.activeProcesses[child.pid] = child;
+         	
+        });
+            
+        // SpeakerPi has a close 
+        node.on('close', function(done) {
+        	node.closing = true;
+            done();
+        });	
+    }
+	RED.nodes.registerType("camerapi-takephoto",CameraPiTakePhotoNode);
 
-         	if ((msg.detectfaces) && (msg.detectfaces !== "")) {
-         		detect = msg.detectfaces;
+    // CameraPI Detect Node
+    function CameraPiDetectNode(config) {
+    	// Create this node
+        RED.nodes.createNode(this,config);
+        
+        // set parameters and save locally 
+		this.filefqn =  config.filefqn;
+		this.detect = config.detect;
+		this.framesize =  config.framesize;
+		this.extract = config.extract;
+		this.name =  config.name;
+		this.activeProcesses = {};
+
+		var node = this;
+		
+        // if there is an new input
+		node.on('input', function(msg) {
+			
+         	var fs = require("fs-extra");
+         	var localdir = JSON.parse(require('fs').readFileSync(require('path').resolve(__dirname, 'settings.json'),'utf8'));
+            var cl = "python " + localdir + "/lib/face/face_detect.py";
+         	var uuid = require('node-uuid').v4();
+        	var imagebuffer = require('stream').Readable;
+            var detect;
+            var framesize;
+            var extract;
+            var fileformat;
+
+         	node.status({fill:"green",shape:"dot",text:"node-red:common.status.connected"});
+
+         	if ((msg.payload) && (msg.payload.trim() !== "")) {
+         			filefqn = msg.payload;
+        	} else {
+        		if (node.filefqn) {
+             		filefqn = node.filefqn;
+        		} else {
+             		filefqn = "pic_" + uuid;
+        		}
+        	}
+ 			cl += " "+filefqn;
+
+         	if ((msg.filepath) && (msg.filepath.trim() !== "")) {
+     			filepath = msg.filepath;
          	} else {
-         		if (node.detectfaces) {
-             		detect = node.detectfaces;
+         		if (node.filepath) {
+         			filepath = node.filepath;
          		} else {
-             		detect = "0";
+         			if (detect == "1") {
+             			filepath = localdir + "/faces";
+         			} else {
+             			filepath = localdir + "/objects";
+         			}
+         		}
+         	}
+ 			cl += " "+filepath;
+     		
+         	if ((msg.fileformat) && (msg.fileformat.trim() !== "")) {
+     			fileformat = msg.fileformat;
+         	} else {
+         		if (node.fileformat) {
+         			fileformat = node.fileformat;
+         		} else {
+         			fileformat = "jpg";
+         		}
+         	}
+ 			cl += " "+fileformat;
+         	
+         	if ((msg.detect) && (msg.detect !== "")) {
+         		detect = msg.detect;
+         	} else {
+         		if (node.detect) {
+             		detect = node.detect;
+         		} else {
+             		detect = "1";
          		}
          	}
      		cl += " " + detect;
 
-         	if ((msg.facesize) && (msg.facesize !== "")) {
-         		facesize = msg.facesize; 
+         	if ((msg.framesize) && (msg.framesize !== "")) {
+         		framesize = msg.framesize; 
          	} else {
-         		if (node.facesize) {
-             		facesize = node.facesize;	        			         			
+         		if (node.framesize) {
+             		framesize = node.framesize;	        			         			
          		} else {
-             		facesize = "1";	      
+             		framesize = "1";	      
              		}
          	}
-         	if (facesize == "1") {
+         	if (framesize == "1") {
              	cl += " 15 20"; 
-         	} else if (resolution == "2" ) {
+         	} else if (framesize == "2" ) {
              	cl += " 20 25";          		
          	} else  {
              	cl += " 25 30";          		
          	}
-         	
+
+         	if ((msg.extract) && (msg.extract !== "")) {
+         		extract = msg.extract; 
+         	} else {
+         		if (node.extract) {
+             		extract = node.extract;	        			         			
+         		} else {
+             		extract = "0";	      
+             		}
+         	}
+     		cl += " " + extract;
+
             if (RED.settings.verbose) { node.log(cl); }
             
             var child = exec(cl, {encoding: 'binary', maxBuffer:10000000}, function (error, stdout, stderr) {
@@ -169,7 +290,6 @@ module.exports = function(RED) {
                     msg.faces = [];
                 } else {
                     msg.payload = filepath+filename+"."+fileformat;
-                    msg.filename = filename+"."+fileformat;
                     msg.faces = [];
                     if (detect == "1") {
                     	for (var i = 1; i <= msg.facecount; i++) {
@@ -195,5 +315,5 @@ module.exports = function(RED) {
             done();
         });	
     }
-	RED.nodes.registerType("camerapi-takephoto",CameraPiTakePhotoNode);
+	RED.nodes.registerType("camerapi-detect",CameraPiDetectNode);
 }
