@@ -15,7 +15,6 @@
   Authors:
      - Olaf Hahn
      - Lars Probst
-     - Ansgar Schmidt
 -->
 
 
@@ -32,15 +31,22 @@
             <option value="0">No</option>
         </select>
     </div>
-    <div id="filepath" class="form-row node-input-filepath>
+    <div id="filepath" class="form-row node-input-filepath">
          <label for="node-input-filepath"><i class="fa fa-tag"></i> <span data-i18n="camerapi.label.filepath"></span></label>
 		<input type="text" id="node-input-filepath">
     </div>
     <div class="form-row node-input-fileformat">
          <label for="node-input-fileformat"><i class="fa fa-tag"></i> <span data-i18n="camerapi.label.fileformat"></span></label>
 	     <select id="node-input-fileformat">
-            <option value="jpg">JPG</option>
+            <option value="jpeg">JPEG</option>
             <option value="png">PNG</option>
+            <option value="gif">GIF</option>
+            <option value="bmp">BMP</option>
+            <option value="yuv">YUV</option>
+            <option value="rgb">RGB</option>
+            <option value="rgba">RGBA</option>
+            <option value="bgr">BGR</option>
+            <option value="bgra">BGRA</option>
         </select>
     </div>
     <div class="form-row node-input-resolution">
@@ -52,7 +58,7 @@
             <option value="4">1024x768</option>
 		</select>
     </div>
-    <div class="form-row">
+    <div class="form-row node-input-name">
         <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="speakerpi.label.name"></span></label>
         <input type="text" id="node-input-name">
     </div>
@@ -73,7 +79,7 @@
             filename: {value:"", required:true},
             filedefpath: {value:"0", required:true},
             filepath: {value:"", required:true},
-            fileformat: {value:"jpg", required:true},
+            fileformat: {value:"jpeg", required:true},
             resolution: {value:"1", required:true},
             name: {value:""}
         },
@@ -103,15 +109,22 @@
 
 <!-- CameraPi Detect Node -->
 <script type="text/x-red" data-template-name="camerapi-detect">
-    <div class="form-row node-input-filefqn">
-         <label for="node-input-filefqn"><i class="fa fa-tag"></i> <span data-i18n="camerapi.label.filefqn"></span></label>
-		<input type="text" id="node-input-filefqn">
+    <div class="form-row node-input-filename">
+         <label for="node-input-filename"><i class="fa fa-tag"></i> <span data-i18n="camerapi.label.filename"></span></label>
+		<input type="text" id="node-input-filename">
     </div>
     <div class="form-row node-input-fileformat">
          <label for="node-input-fileformat"><i class="fa fa-tag"></i> <span data-i18n="camerapi.label.fileformat"></span></label>
 	     <select id="node-input-fileformat">
-            <option value="jpg">JPG</option>
+            <option value="jpeg">JPEG</option>
             <option value="png">PNG</option>
+            <option value="gif">GIF</option>
+            <option value="bmp">BMP</option>
+            <option value="yuv">YUV</option>
+            <option value="rgb">RGB</option>
+            <option value="rgba">RGBA</option>
+            <option value="bgr">BGR</option>
+            <option value="bgra">BGRA</option>
         </select>
     </div>
     <div class="form-row node-input-filedefpath">
@@ -121,7 +134,7 @@
             <option value="0">No</option>
         </select>
     </div>
-    <div id="filepath" class="form-row node-input-filepath>
+    <div id="filepath" class="form-row node-input-filepath">
          <label for="node-input-filepath"><i class="fa fa-tag"></i> <span data-i18n="camerapi.label.filepath"></span></label>
 		<input type="text" id="node-input-filepath">
     </div>
@@ -129,7 +142,7 @@
          <label for="node-input-detect"><i class="fa fa-simel-o"></i> <span data-i18n="camerapi.label.detect"></span></label>
 	     <select id="node-input-detect">
             <option value="1">Faces</option>
-            <option value="2">Objects</option>
+            <option value="2">Corners</option>
         </select>
     </div>
     <div class="form-row node-input-framesize">
@@ -147,7 +160,7 @@
             <option value="0">No</option>
         </select>
     </div>
-    <div class="form-row">
+    <div class="form-row node-input-name">
         <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="speakerpi.label.name"></span></label>
         <input type="text" id="node-input-name">
     </div>
@@ -167,8 +180,8 @@
         category: 'Raspberry_Pi',
         color: '#A6BBCF',
         defaults: {
-            filefqn: {value:"", required:true},
-            fileformat: {value:"jpg", required:true},
+            filename: {value:"", required:true},
+            fileformat: {value:"jpeg", required:true},
             filedefpath: {value:"0", required:true},
             filepath: {value:"", required:true},
             detect: {value:"1", required:true},

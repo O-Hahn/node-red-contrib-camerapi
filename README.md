@@ -26,8 +26,8 @@ Provides some nodes to take a photo, capture faces and delete them.
 This node is to take a photo in a given format directly from the Raspberry Pi Camera. The image of the photo is stored into the file-system and msg.payload will give you the path and the filename including extension to the photo.
 
 ### DetectFaces
-If you choose the Face-Detection - you will also get in msg.facescount the number of detected faces. 
-To implement all nodes with only one configuration setting - there is a config node implemented for the GrovePi Board. It contains internal values - and has only a name. 
+If you choose the Face-Detection - you will also get in msg.facescount the number of detected faces and a JSON with the necessary information to the detected face (x,y,x+w,y+h) and if in filemode the name, path and format of the file with the face cuttet from the image. 
 
 ### DeletePhoto
+Will delete a taken photo from the given path with or without the extracted faces. 
 

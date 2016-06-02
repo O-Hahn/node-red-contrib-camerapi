@@ -1,4 +1,4 @@
-
+# imports
 import io
 import array
 import cv2
@@ -56,19 +56,22 @@ i=0
 for (x,y,w,h) in faces:
     i = i + 1
     if mode == "1":
-        face = image[(x,y), (x+w,y+h)]
+        face = image[y:y+h,x:x+w]
         tempfqn = filePath + fileName + str(i) + '.' + fileFormat
         cv2.imwrite(tempfqn, face)
-    item = {'face'+str(i): {'filefqn':tempfqn, 'filename':fileName+str(i), 'fileformat':fileFormat,'startX':x, 'startY':y, 'toX':x+w, 'toY': y+h}}
-    dict.update(item)
+        item = {'face'+str(i): {'filefqn':tempfqn, 'filename':fileName+str(i), 'filepath':filePath, 'fileformat':fileFormat,'startX':x, 'startY':y, 'toX':x+w, 'toY': y+h}}
+        dict.update(item)
     else:
         cv2.rectangle(image,(x,y),(x+w,y+h),(255,0,0),2)
-        item = {'face'+str(i):{'startX':x, 'startY':y, 'toX':x+w, 'toY': y+h}}
-    dict.update(item)
+        item = {'face'+str(i): {'startX':x, 'startY':y, 'toX':x+w, 'toY': y+h}}
+        dict.update(item)
 
 # Save the modified rectangle image with the detected faces
-if mode == "0":
-    cv2.imwrite(filePath + filename + '.' + fileFormat, image)
+if mode == "0" and i > 0:
+    tempfqn = filePath + fileName + '0.' + fileFormat
+    cv2.imwrite(tempfqn, image)
+    item = {'facepic': {'filefqn':tempfqn, 'filename':fileName+'0', 'filepath':filePath, 'fileformat':fileFormat}}
+    dict.update(item)
 
 # Print out the faces
 print(json.dumps(dict))

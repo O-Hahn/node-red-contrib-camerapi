@@ -15,7 +15,6 @@
  * Authors:
  *    - Olaf Hahn
  *    - Lars Probst
- *    - Ansgar Schmidt
  **/
 
 
@@ -76,7 +75,7 @@ module.exports = function(RED) {
          		if (node.filepath) {
          			filepath = node.filepath;
          		} else {
-         			filepath = localdir + "/images";
+         			filepath = localdir + "/images/";
          		}
          	}
  			cl += " "+filepath;
@@ -87,7 +86,7 @@ module.exports = function(RED) {
          		if (node.fileformat) {
          			fileformat = node.fileformat;
          		} else {
-         			fileformat = "jpg";
+         			fileformat = "jpeg";
          		}
          	}
  			cl += " "+fileformat;
@@ -161,7 +160,10 @@ module.exports = function(RED) {
         RED.nodes.createNode(this,config);
         
         // set parameters and save locally 
-		this.filefqn =  config.filefqn;
+		this.filename =  config.filename;
+		this.filedefpath = config.filedefpath;
+		this.filepath = config.filepath;
+		this.fileformat = config.fileformat;
 		this.detect = config.detect;
 		this.framesize =  config.framesize;
 		this.extract = config.extract;
@@ -182,21 +184,44 @@ module.exports = function(RED) {
             var framesize;
             var extract;
             var fileformat;
+            var filefqn;
 
          	node.status({fill:"green",shape:"dot",text:"node-red:common.status.connected"});
 
-         	if ((msg.payload) && (msg.payload.trim() !== "")) {
-         			filefqn = msg.payload;
-        	} else {
-        		if (node.filefqn) {
-             		filefqn = node.filefqn;
-        		} else {
-             		filefqn = "pic_" + uuid;
-        		}
-        	}
- 			cl += " "+filefqn;
+ 			if ((msg.filename) && (msg.filename.trim() !== "")) {
+	     			filename = msg.filename;
+	    	} else {
+	    		if (node.filename) {
+	         		filename = node.filename;
+	    		} else {
+	         		filename = "pic_" + uuid;
+	    		}
+	    	}
+			cl += " "+filename;
+	
+	     	if ((msg.filepath) && (msg.filepath.trim() !== "")) {
+	 			filepath = msg.filepath;
+	     	} else {
+	     		if (node.filepath) {
+	     			filepath = node.filepath;
+	     		} else {
+	     			filepath = localdir + "/images/";
+	     		}
+	     	}
+			cl += " "+filepath;
+	 		
+	     	if ((msg.fileformat) && (msg.fileformat.trim() !== "")) {
+	 			fileformat = msg.fileformat;
+	     	} else {
+	     		if (node.fileformat) {
+	     			fileformat = node.fileformat;
+	     		} else {
+	     			fileformat = "jpeg";
+	     		}
+	     	}
+			cl += " "+fileformat;
 
-         	if ((msg.filepath) && (msg.filepath.trim() !== "")) {
+ 			if ((msg.filepath) && (msg.filepath.trim() !== "")) {
      			filepath = msg.filepath;
          	} else {
          		if (node.filepath) {

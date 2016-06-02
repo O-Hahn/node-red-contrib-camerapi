@@ -23,18 +23,18 @@ os.chdir(locDir)
 picfile = open(filefqn, 'wb')
 
 # Define the camera
-if fileFormat == "png":
-    with picamera.PiCamera() as camera:
-        camera.resolution = (int(resolutionX), int(resolutionY))
-        camera.hflip = True
-        camera.vflip = True
-        camera.capture(picfile, format='png')
-else:
+if fileFormat == "jpg":
     with picamera.PiCamera() as camera:
         camera.resolution = (int(resolutionX), int(resolutionY))
         camera.hflip = True
         camera.vflip = True
         camera.capture(picfile, format='jpeg')
+else:
+    with picamera.PiCamera() as camera:
+        camera.resolution = (int(resolutionX), int(resolutionY))
+        camera.hflip = True
+        camera.vflip = True
+        camera.capture(picfile, format=fileFormat)
 
 # flush the buffer
 picfile.close()
