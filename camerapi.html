@@ -90,7 +90,7 @@
             $("#node-input-filedefpath").change(function() {
                 var choose = $("#node-input-filedefpath").val();
                 console.log(choose);
-                if (choose == "1") {
+                if (choose == "0") {
                 	console.log("FileDefPath - yes");
                 	$("#filepath").show();
                 } else {
@@ -108,7 +108,7 @@
 
 
 <!-- CameraPi Detect Node -->
-<!-- 
+
 <script type="text/x-red" data-template-name="camerapi-detect">
     <div class="form-row node-input-filename">
          <label for="node-input-filename"><i class="fa fa-tag"></i> <span data-i18n="camerapi.label.filename"></span></label>
@@ -170,7 +170,6 @@
 <script type="text/x-red" data-help-name="camerapi-detect">
     <p>This Detect Node for Raspberry PI identifies faces in a photo. </p>
 	<p>In the <b>msg.payload</b> there must be the full qualified path and filename with extension to the photo which should be analyzed. </p>
-	<p> </p>
 	<p>The node returns <b>msg.payload</b> with the number of detected faces. </p>
 	<p>In <b>msg.facecount</b> you will get the count of detected faces.</p>
 	<p>If the <b>msg.facecount</b> is not 0 will in <b>msg.faces</b> be an array of filenames to the photoes of the extracted faces. </p>
@@ -198,7 +197,7 @@
             $("#node-input-filedefpath").change(function() {
                 var choose = $("#node-input-filedefpath").val();
                 console.log(choose);
-                if (choose == "1") {
+                if (choose == "0") {
                 	console.log("FileDefPath - yes");
                 	$("#filepath").show();
                 } else {
@@ -213,5 +212,3 @@
     });
 </script>
 <!-- End of Camera Pi detect Node -->
-
- -->

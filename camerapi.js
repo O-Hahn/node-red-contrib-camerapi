@@ -153,7 +153,7 @@ module.exports = function(RED) {
         });	
     }
 	RED.nodes.registerType("camerapi-takephoto",CameraPiTakePhotoNode);
-/** 
+
     // CameraPI Detect Node
     function CameraPiDetectNode(config) {
     	// Create this node
@@ -341,5 +341,5 @@ module.exports = function(RED) {
         });	
     }
 	RED.nodes.registerType("camerapi-detect",CameraPiDetectNode);
-**/ 
+	
 }
