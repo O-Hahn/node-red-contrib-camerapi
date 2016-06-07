@@ -138,14 +138,27 @@
             <option value="bgra">BGRA</option>
         </select>
     </div>
-    <div class="form-row node-input-resolution">
-         <label for="node-input-resolution"><i class="fa fa-fa-camera"></i> <span data-i18n="camerapi.label.resolution"></span></label>
-	     <select id="node-input-resolution">
-            <option value="1">320x240</option>
-            <option value="2">640x480</option>
-            <option value="3">800x600</option>
-            <option value="4">1024x768</option>
-		</select>
+    <div class="form-row node-input-detect">
+         <label for="node-input-detect"><i class="fa fa-smile-o"></i> <span data-i18n="camerapi.label.detect"></span></label>
+	     <select id="node-input-detect">
+            <option value="1">Faces</option>
+            <option value="2">Corners</option>
+        </select>
+    </div>
+    <div class="form-row node-input-framesize">
+         <label for="node-input-framesize"><i class="fa fa-smile-o"></i> <span data-i18n="camerapi.label.framesize"></span></label>
+	     <select id="node-input-framesize">
+            <option value="1">15x20 px</option>
+            <option value="2">20x25 px</option>
+            <option value="3">25x30 px</option>
+        </select>
+    </div>
+    <div class="form-row node-input-extract">
+         <label for="node-input-extract"><i class="fa fa-smile-o"></i> <span data-i18n="camerapi.label.extract"></span></label>
+	     <select id="node-input-extract">
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+        </select>
     </div>
     <div class="form-row node-input-name">
         <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="speakerpi.label.name"></span></label>
@@ -170,7 +183,9 @@
             filedefpath: {value:"0", required:true},
             filepath: {value:"", required:true},
             fileformat: {value:"jpeg", required:true},
-            resolution: {value:"1", required:true},
+            detect: {value:"1", required:true},
+            framesize: {value:"1", required:true},
+            extract: {value:"1", required:true},
             name: {value:""}
         },
         inputs:1,
@@ -195,85 +210,3 @@
     });
 </script>
 <!-- End of CameraPi Detect Faces Node -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- 
-    <div class="form-row node-input-detect">
-         <label for="node-input-detect"><i class="fa fa-simel-o"></i> <span data-i18n="camerapi.label.detect"></span></label>
-	     <select id="node-input-detect">
-            <option value="1">Faces</option>
-            <option value="2">Corners</option>
-        </select>
-    </div>
-    <div class="form-row node-input-framesize">
-         <label for="node-input-framesize"><i class="fa fa-simel-o"></i> <span data-i18n="camerapi.label.framesize"></span></label>
-	     <select id="node-input-framesize">
-            <option value="1">15x20 px</option>
-            <option value="2">20x25 px</option>
-            <option value="3">25x30 px</option>
-        </select>
-    </div>
-    <div class="form-row node-input-extract">
-         <label for="node-input-extract"><i class="fa fa-simel-o"></i> <span data-i18n="camerapi.label.extract"></span></label>
-	     <select id="node-input-extract">
-            <option value="1">Yes</option>
-            <option value="0">No</option>
-        </select>
-    </div>
-    <div class="form-row node-input-name">
-        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="speakerpi.label.name"></span></label>
-        <input type="text" id="node-input-name">
-    </div>
-
-<script type="text/javascript">
-    RED.nodes.registerType('camerapi-detect',{
-        category: 'Raspberry_Pi',
-        color: '#A6BBCF',
-        defaults: {
-            filename: {value:"", required:true},
-            fileformat: {value:"jpeg", required:true},
-            filedefpath: {value:"0", required:true},
-            filepath: {value:"", required:true},
-            detect: {value:"1", required:true},
-            framesize: {value:"1", required:true},
-            extract: {value:"1", required:true},
-            name: {value:""}
-        },
-        inputs:1,
-        outputs:1,
-        icon: "photo.png",
-        },
-        oneditprepare: function() {
-            $("#node-input-filedefpath").change(function() {
-                var choose = $("#node-input-filedefpath").val();
-                console.log(choose);
-                if (choose == "0") {
-                	console.log("FileDefPath - yes");
-                	$("#filepath").show();
-                } else {
-                	console.log("FileDefPath - no");
-                	$("#filepath").hide();
-                }
-            });
-        },
-        label: function() {
-            return this.name || "detect node";
-        }
-    });
-</script>
- -->
