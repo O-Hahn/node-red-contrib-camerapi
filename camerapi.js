@@ -50,7 +50,7 @@ module.exports = function(RED) {
          	var fs = require("fs-extra");
          	var uuid = require('node-uuid').v4();
         	var imagebuffer = require('stream').Readable;
-         	var localdir = JSON.parse(require('fs').readFileSync(require('path').resolve(__dirname, 'settings.json'),'utf8'));
+         	var localdir = JSON.parse(require('fs').readFileSync(require('path').resolve(__dirname, 'camerapi.json'),'utf8'));
             var cl = "python " + localdir + "/lib/face/get_photo.py";
             var resolution;
             var fileformat;
@@ -177,7 +177,7 @@ module.exports = function(RED) {
          	var fs = require("fs-extra");
          	var uuid = require('node-uuid').v4();
         	var imagebuffer = require('stream').Readable;
-         	var localdir = JSON.parse(require('fs').readFileSync(require('path').resolve(__dirname, 'settings.json'),'utf8'));
+         	var localdir = JSON.parse(require('fs').readFileSync(require('path').resolve(__dirname, 'camerapi.json'),'utf8'));
             var cl = "python " + localdir + "/lib/face/get_photo.py";
             var resolution;
             var fileformat;
@@ -304,7 +304,7 @@ module.exports = function(RED) {
 		node.on('input', function(msg) {
 			
          	var fs = require("fs-extra");
-         	var localdir = JSON.parse(require('fs').readFileSync(require('path').resolve(__dirname, 'settings.json'),'utf8'));
+         	var localdir = JSON.parse(require('fs').readFileSync(require('path').resolve(__dirname, 'camerapi.json'),'utf8'));
             var cl = "python " + localdir + "/lib/face/face_detect.py";
          	var uuid = require('node-uuid').v4();
         	var imagebuffer = require('stream').Readable;
