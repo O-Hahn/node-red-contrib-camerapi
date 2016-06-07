@@ -25,10 +25,138 @@ module.exports = function(RED) {
     var events = require("events");
     var exec = require('child_process').exec;
     var isUtf8 = require('is-utf8');
+    var RaspiCam = require("raspicam-js");
     var bufMaxSize = 32768;  // Max serial buffer size, for inputs...
 
     // CameraPI Take Photo Node
     function CameraPiTakePhotoNode(config) {
+    	// Create this node
+        RED.nodes.createNode(this,config);
+        
+        // set parameters and save locally 
+		this.filename =  config.filename;
+		this.filedefpath = config.filedefpath;
+		this.filepath = config.filepath;
+		this.fileformat = config.fileformat;
+		this.resolution =  config.resolution;
+		this.name =  config.name;
+		this.activeCam = {};
+
+		var node = this;
+		
+        // if there is an new input
+		node.on('input', function(msg) {
+		
+         	var fs = require("fs-extra");
+         	var uuid = require('node-uuid').v4();
+        	var imagebuffer = require('stream').Readable;
+         	var localdir = JSON.parse(require('fs').readFileSync(require('path').resolve(__dirname, 'settings.json'),'utf8'));
+            var cl = "python " + localdir + "/lib/face/get_photo.py";
+            var resolution;
+            var fileformat;
+            var filename;
+            var filepath;
+            var filefqn;
+            var width, height;
+
+         	node.status({fill:"green",shape:"dot",text:"node-red:common.status.connected"});
+
+         	if ((msg.filename) && (msg.filename.trim() !== "")) {
+         			filename = msg.filename;
+        	} else {
+        		if (node.filename) {
+             		filename = node.filename;
+        		} else {
+             		filename = "pic_" + uuid;
+        		}
+        	}
+
+         	if ((msg.filepath) && (msg.filepath.trim() !== "")) {
+     			filepath = msg.filepath;
+         	} else {
+         		if (node.filepath) {
+         			filepath = node.filepath;
+         		} else {
+         			filepath = localdir + "/images/";
+         		}
+         	}
+     		
+         	if ((msg.fileformat) && (msg.fileformat.trim() !== "")) {
+     			fileformat = msg.fileformat;
+         	} else {
+         		if (node.fileformat) {
+         			fileformat = node.fileformat;
+         		} else {
+         			fileformat = "jpeg";
+         		}
+         	}
+         	if (fileformat == "jpeg") { fileformat = "jpg"; };
+         	
+         	filefqn = filepath + filename + '.' + fileformat;
+         	
+         	if ((msg.resolution) && (msg.resolution !== "")) {
+         		resolution = msg.resolution; 
+         		} else {
+         			if (node.resolution) {
+                 		resolution = node.resolution;	        			
+         			} else {
+                 		resolution = "1";	        			         					
+         			}
+            	}
+         	if (resolution == "1") {
+         		width = 320;
+         		height = 240;
+         	} else if (resolution == "2" ) {
+         		width = 640;
+         		height = 480;
+         	} else if (resolution == "3" ) {
+         		width = 800;
+         		height = 600;
+         	} else  {
+         		width = 1024;
+         		height = 768;
+         	}
+         	
+         	// Create a camera Object with the given parameters 
+         	var camera = new RaspiCam({
+         		mode: "photo",
+         		output: filefqn,
+         		encoding: fileformat,
+         		width: width,
+         		height: height,
+         		timeout: 0
+         	});
+         	
+            camera.on("started" , function (err, timestamp) {
+                if (RED.settings.verbose) { node.log("CameraPi Started: At"+timestamp); }
+            });  
+            camera.on("read" , function (err, timestamp, filefqn, msg) {
+                if (RED.settings.verbose) { node.log("CameraPi Read: At-"+timestamp+" "+filefqn); }
+                
+                msg.payload = filefqn;
+                node.status({});
+                node.send(msg);
+            });
+            
+            camera.on("exit" , function (err, timestamp) {
+                if (RED.settings.verbose) { node.log("CameraPi Exit: At-"+timestamp); }            	
+            });
+            
+            camera.start();
+            
+        });
+            
+        // CameraPi-TakePhoto has a close 
+        node.on('close', function(done) {
+        	node.closing = true;
+            done();
+        });	
+    }
+	RED.nodes.registerType("camerapi-takephoto",CameraPiTakePhotoNode);
+
+
+    // CameraPI Take Photo Node
+    function CameraPiTakePhotoPythonNode(config) {
     	// Create this node
         RED.nodes.createNode(this,config);
         
@@ -45,7 +173,7 @@ module.exports = function(RED) {
 		
         // if there is an new input
 		node.on('input', function(msg) {
-			
+		
          	var fs = require("fs-extra");
          	var uuid = require('node-uuid').v4();
         	var imagebuffer = require('stream').Readable;
@@ -146,15 +274,15 @@ module.exports = function(RED) {
          	
         });
             
-        // SpeakerPi has a close 
+        // CameraPi-TakePhoto has a close 
         node.on('close', function(done) {
         	node.closing = true;
             done();
         });	
     }
-	RED.nodes.registerType("camerapi-takephoto",CameraPiTakePhotoNode);
+	RED.nodes.registerType("camerapi-takephotopython",CameraPiTakePhotoPythonNode);
 
-    // CameraPI Detect Node
+	// CameraPI Detect Node
     function CameraPiDetectNode(config) {
     	// Create this node
         RED.nodes.createNode(this,config);
@@ -334,7 +462,7 @@ module.exports = function(RED) {
          	
         });
             
-        // SpeakerPi has a close 
+        // CameraPi-Detect has a close 
         node.on('close', function(done) {
         	node.closing = true;
             done();
