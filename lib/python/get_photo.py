@@ -10,6 +10,16 @@ fileFormat = sys.argv[3]
 resolutionX = sys.argv[4]
 resolutionY = sys.argv[5]
 
+# Set vflip and hflip if needed
+if sys.argv[6] == "1":
+    hflip = True
+else:
+    hflip = False
+if sys.argv[7] == "1":
+    vflip = True
+else:
+    vflip = False
+    
 # Set the filefqn
 if fileFormat == 'jpeg':
     fileFormat = 'jpg'    
@@ -26,14 +36,14 @@ picfile = open(filefqn, 'wb')
 if fileFormat == "jpg":
     with picamera.PiCamera() as camera:
         camera.resolution = (int(resolutionX), int(resolutionY))
-        camera.hflip = True
-        camera.vflip = True
+        camera.hflip = hflip
+        camera.vflip = vflip
         camera.capture(picfile, format='jpeg')
 else:
     with picamera.PiCamera() as camera:
         camera.resolution = (int(resolutionX), int(resolutionY))
-        camera.hflip = True
-        camera.vflip = True
+        camera.hflip = hflip
+        camera.vflip = vflip
         camera.capture(picfile, format=fileFormat)
 
 # flush the buffer

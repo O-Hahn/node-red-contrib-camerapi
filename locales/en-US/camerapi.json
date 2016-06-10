@@ -5,6 +5,7 @@
             "filename": "File Name",
             "filedefpath": "File default path", 
             "filepath": "File Path", 
+            "filemode":"File Mode", 
             "size": "Image Resolution", 
             "detect" : "Detect",
             "fileformat": "File Format",
