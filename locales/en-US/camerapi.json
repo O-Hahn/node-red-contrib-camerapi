@@ -18,6 +18,12 @@
             "res2":"640x480",
             "res3":"800x600",
             "res4":"1024x768",
+            "region":"Region",
+            "tendantId":"Tendant Id",
+            "userId":"User Id", 
+            "userName":"User Name", 
+            "password":"Password", 
+            "container":"Container",
             "name": "Name",
             "none": "none"
         },

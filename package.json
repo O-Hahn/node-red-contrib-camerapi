@@ -18,6 +18,7 @@
 	 	"is-utf8": "latest",
 	 	"node-uuid" : "latest", 
 	 	"fs-extra" : "latest",
+	 	"pkgcloud-bluemix-objectstorage" : "latest",
 	 	"fs" : "latest" 
   	 },
      "repository": {

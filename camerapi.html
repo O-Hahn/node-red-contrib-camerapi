@@ -226,6 +226,7 @@
         category: 'Raspberry_Pi',
         color: '#A6BBCF',
         defaults: {
+            filemode: {value:"1", required:true},
             filename: {value:"", required:false},
             filedefpath: {value:"0", required:true},
             filepath: {value:"", required:false},
@@ -274,3 +275,140 @@
     });
 </script>
 <!-- End of CameraPi Detect Faces Node -->
+
+
+<!-- CameraPi Store -->
+<script type="text/x-red" data-template-name="camerapi-store">
+    <div class="form-row node-input-filemode">
+         <label for="node-input-filemode"><i class="fa fa-file-image-o"></i> <span data-i18n="camerapi.label.filemode"></span></label>
+	     <select id="node-input-filemode">
+            <option value="1">Filemode</option>
+            <option value="0">Buffermode</option>
+        </select>
+    </div>
+    <div id="filename" class="form-row node-input-filename">
+         <label for="node-input-filename"><i class="fa fa-tag"></i> <span data-i18n="camerapi.label.filename"></span></label>
+		<input type="text" id="node-input-filename">
+    </div>
+    <div id="filedefpath" class="form-row node-input-filedefpath">
+         <label for="node-input-filedefpath"><i class="fa fa-folder"></i> <span data-i18n="camerapi.label.filedefpath"></span></label>
+	     <select id="node-input-filedefpath">
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+        </select>
+    </div>
+    <div id="filepath" class="form-row node-input-filepath">
+         <label for="node-input-filepath"><i class="fa fa-folder"></i> <span data-i18n="camerapi.label.filepath"></span></label>
+		<input type="text" id="node-input-filepath">
+    </div>
+    <div id="fileformat" class="form-row node-input-fileformat">
+         <label for="node-input-fileformat"><i class="fa fa-file-image-o"></i> <span data-i18n="camerapi.label.fileformat"></span></label>
+	     <select id="node-input-fileformat">
+            <option value="jpeg">JPEG</option>
+            <option value="png">PNG</option>
+            <option value="gif">GIF</option>
+            <option value="bmp">BMP</option>
+            <option value="yuv">YUV</option>
+            <option value="rgb">RGB</option>
+            <option value="rgba">RGBA</option>
+            <option value="bgr">BGR</option>
+            <option value="bgra">BGRA</option>
+        </select>
+    </div>
+    <div class="form-row node-input-region">
+         <label for="node-input-region"><i class="fa fa-smile-o"></i> <span data-i18n="camerapi.label.region"></span></label>
+	     <select id="node-input-region">
+            <option value="dallas">Dallas</option>
+            <option value="london">London</option>
+        </select>
+    </div>
+    <div class="form-row node-input-tendantId">
+        <label for="node-input-tendantId"><i class="fa fa-tag"></i> <span data-i18n="speakerpi.label.tendantId"></span></label>
+        <input type="text" id="node-input-tendantId">
+    </div>
+    <div class="form-row node-input-userId">
+        <label for="node-input-userId"><i class="fa fa-tag"></i> <span data-i18n="speakerpi.label.userId"></span></label>
+        <input type="text" id="node-input-userId">
+    </div>
+    <div class="form-row node-input-userName">
+        <label for="node-input-userName"><i class="fa fa-tag"></i> <span data-i18n="speakerpi.label.userName"></span></label>
+        <input type="text" id="node-input-userName">
+    </div>
+    <div class="form-row node-input-password">
+        <label for="node-input-password"><i class="fa fa-tag"></i> <span data-i18n="speakerpi.label.password"></span></label>
+        <input type="text" id="node-input-password">
+    </div>
+    <div class="form-row node-input-container">
+        <label for="node-input-container"><i class="fa fa-tag"></i> <span data-i18n="speakerpi.label.container"></span></label>
+        <input type="text" id="node-input-container">
+    </div>
+    <div class="form-row node-input-name">
+        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="speakerpi.label.name"></span></label>
+        <input type="text" id="node-input-name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="camerapi-store">
+    <p>This <b>Store Node</b> sends the image to the Object Storeage Service on Bluemix. </p>
+	<p>The <b>msg.filemode</b> indecates if the <b>msg.payload</b> contains the raw image or only the trigger for the image </p>
+	<p>You can override the node-defaults by giving <b>msg.filename</b>, <b>msg.path</b> and <b>msg.format</b> with the necessary informations.</p>
+	<p>The node returns <b>msg.payload</b> with the link to the Object. </p>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('camerapi-store',{
+        category: 'Raspberry_Pi',
+        color: '#A6BBCF',
+        defaults: {
+            filemode: {value:"1", required:true},
+            filename: {value:"", required:false},
+            filedefpath: {value:"0", required:true},
+            filepath: {value:"", required:false},
+            fileformat: {value:"jpeg", required:true},
+            region: {value:"dallas", required:true},
+            tendentId: {value:"", required:true},
+            userId: {value:"", required:true},
+            username: {value:"", required:true},
+            password: {value:"", required:true},
+            container: {value:"", required:true},
+            name: {value:""}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "photo.png",
+        oneditprepare: function() {
+            $("#node-input-filemode").change(function() {
+                var choose = $("#node-input-filemode").val();
+                console.log(choose);
+                if (choose == "0") {
+                	console.log("FileMode - no");
+                	$("#filename").hide();
+                	$("#filedefpath").hide();
+                	$("#filepath").hide();
+                	$("#fileformat").hide();
+                } else {
+                	console.log("FileMode - yes");
+                	$("#filename").show();
+                	$("#filedefpath").show();
+                	$("#filepath").show();
+                	$("#fileformat").show();
+                }
+            });
+            $("#node-input-filedefpath").change(function() {
+                var choose = $("#node-input-filedefpath").val();
+                console.log(choose);
+                if (choose == "0") {
+                	console.log("FileDefPath - yes");
+                	$("#filepath").show();
+                } else {
+                	console.log("FileDefPath - no");
+                	$("#filepath").hide();
+                }
+            });
+        },
+        label: function() {
+            return this.name || "store node";
+        }
+    });
+</script>
+<!-- End of CameraPi Store Node -->
