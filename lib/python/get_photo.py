@@ -9,6 +9,8 @@ filePath = sys.argv[2]
 fileFormat = sys.argv[3]
 resolutionX = sys.argv[4]
 resolutionY = sys.argv[5]
+hflip = sys.argv[6]
+vflip = sys.argv[7]
 
 # Set vflip and hflip if needed
 if sys.argv[6] == "1":

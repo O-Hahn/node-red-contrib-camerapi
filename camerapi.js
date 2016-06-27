@@ -61,6 +61,7 @@ module.exports = function(RED) {
             var filepath;
             var filemode;
             var filefqn;
+            var fliph, flipv;
 
          	node.status({fill:"green",shape:"dot",text:"node-red:common.status.connected"});
 
@@ -138,7 +139,27 @@ module.exports = function(RED) {
              	cl += " 1024 768";          		
          	}
 
-            if (RED.settings.verbose) { node.log(cl); }
+         	if ((msg.fliph) && (msg.fliph !== "")) {
+         		fliph = msg.fliph; 
+         		} else {
+         			if (node.fliph) {
+                 		fliph = node.fliph;	        			
+         			} else {
+                 		fliph = "1";	        			         					
+         			}
+            	}
+         	if ((msg.flipv) && (msg.flipv !== "")) {
+         		flipv = msg.flipv; 
+         		} else {
+         			if (node.flipv) {
+                 		flipv = node.flipv;	        			
+         			} else {
+                 		flipv= "1";	        			         					
+         			}
+            	}
+         	cl += " " + fliph + " " + flipv;          		
+
+         	if (RED.settings.verbose) { node.log(cl); }
             
             filefqn = filepath + filename + "." + fileformat;
 
@@ -599,7 +620,7 @@ module.exports = function(RED) {
                           
               // Upload File
               var readStream = fs.createReadStream(filefqn);
-              var writeStream = client.upload({
+              var writeStream = storageClient.upload({
                 container: contianer,
                 remote: filename+"."+fileformat
               });
