@@ -1,6 +1,6 @@
 {
     "name"         : "node-red-contrib-camerapi",
-    "version"      : "0.0.18",
+    "version"      : "0.0.20",
     "description"  : "Node Red Nodes for getting photos, processing via opencv on raspberry pi with a raspberry pi camera ",
     "license"      : "Apache-2.0",
     "main"		   : "camerapi.js",
