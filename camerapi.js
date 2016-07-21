@@ -261,7 +261,7 @@ module.exports = function(RED) {
             var framesize;
             var extract;
 
-         	node.status({fill:"green",shape:"dot",text:"node-red:common.status.connected"});
+         	node.status({fill:"green",shape:"dot",text:"connected"});
 
          	// Check the given filemode
          	if((msg.filemode) && (msg.filemode !== "")) {
