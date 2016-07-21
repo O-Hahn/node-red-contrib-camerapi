@@ -63,7 +63,7 @@ module.exports = function(RED) {
             var filefqn;
             var fliph, flipv;
 
-         	node.status({fill:"green",shape:"dot",text:"node-red:common.status.connected"});
+         	node.status({fill:"green",shape:"dot",text:"connected"});
 
          	// Check the given filemode
          	if((msg.filemode) && (msg.filemode !== "")) {
@@ -77,10 +77,10 @@ module.exports = function(RED) {
          	}
          		
          	if (filemode == "0") {
-         		filename = "pic_" + uuid;
-         		fileformat = "jpg";
+         		filename = "pic_" + uuid + '.jpg';
+         		fileformat = "jepg";
          		filepath = defdir + "/";
-         		filefqn = filepath + filename + "." + fileformat;
+         		filefqn = filepath + filename;
                 if (RED.settings.verbose) { node.log("camerapi takephoto:"+filefqn); }
          		console.log("CameraPi (log): Tempfile - " + filefqn);
 
@@ -92,7 +92,7 @@ module.exports = function(RED) {
 	        		if (node.filename) {
 	             		filename = node.filename;
 	        		} else {
-	             		filename = "pic_" + uuid;
+	             		filename = "pic_" + uuid + '.jpg';
 	        		}
 	        	}
 	 			cl += " "+filename;
@@ -161,7 +161,7 @@ module.exports = function(RED) {
 
          	if (RED.settings.verbose) { node.log(cl); }
             
-            filefqn = filepath + filename + "." + fileformat;
+            filefqn = filepath + filename;
 
             var child = exec(cl, {encoding: 'binary', maxBuffer:10000000}, function (error, stdout, stderr) {
                 var retval = new Buffer(stdout,"binary");
@@ -275,10 +275,10 @@ module.exports = function(RED) {
          	}
          		
          	if (filemode == "0") {
-         		filename = "pic_" + uuid;
-         		fileformat = "jpg";
+         		filename = "pic_" + uuid + '.jpg';
+         		fileformat = "jpeg";
          		filepath = defdir + "/";
-         		filefqn = filepath + filename + "." + fileformat;
+         		filefqn = filepath + filename;
 
          		if (RED.settings.verbose) { node.log("camerapi detect:"+filefqn); }
          		console.log("CameraPi (log): Tempfile - " + filefqn);
@@ -295,7 +295,7 @@ module.exports = function(RED) {
     	    		if (node.filename) {
     	         		filename = node.filename;
     	    		} else {
-    	         		filename = "pic_" + uuid;
+    	         		filename = "pic_" + uuid + '.jpg';
     	    		}
     	    	}
     			cl += " "+filename;
@@ -321,13 +321,13 @@ module.exports = function(RED) {
              		if (node.fileformat) {
              			fileformat = node.fileformat;
              		} else {
-             			fileformat = "jpg";
+             			fileformat = "jpeg";
              		}
              	}
      			cl += " "+fileformat;
          	}
 
-     		filefqn = filepath + filename + "." + fileformat;
+     		filefqn = filepath + filename;
 
          	if ((msg.detect) && (msg.detect !== "")) {
          		detect = msg.detect;

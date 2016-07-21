@@ -21,11 +21,13 @@ mode = sys.argv[7]
 locDir, locName = os.path.split(os.path.abspath(sys.argv[0])) 
 os.chdir(locDir)
 
+onlyFileName, onlyFileExt = os.path.splitext(fileName)
+
 # Get the file
 if fileFormat == 'jpeg': 
     fileFormat = 'jpg'
 
-image = cv2.imread(filePath + fileName + '.' + fileFormat)
+image = cv2.imread(filePath + fileName)
 
 # Load a cascade file for detecting faces
 face_cascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
@@ -52,15 +54,16 @@ l = []
 item = {'facecount': len(faces)}
 dict.update(item)
 
+
 # Draw a rectangle around every found face or split the face into several files
 i=0
 for (x,y,w,h) in faces:
     i = i + 1
     if mode == "1":
         face = image[y:y+h,x:x+w]
-        tempfqn = filePath + fileName + str(i) + '.' + fileFormat
+        tempfqn = filePath + onlyFileName + '_' + str(i) + '.' + fileFormat
         cv2.imwrite(tempfqn, face)
-        l.append({'filefqn':tempfqn, 'filename':fileName+str(i), 'filepath':filePath, 'fileformat':fileFormat,'startX':x, 'startY':y, 'toX':x+w, 'toY': y+h})
+        l.append({'filefqn':tempfqn, 'filename':onlyFileName+'_'+str(i)+'.'+fileFormat, 'filepath':filePath, 'fileformat':fileFormat,'startX':x, 'startY':y, 'toX':x+w, 'toY': y+h})
         # item = {'face'+str(i): {'filefqn':tempfqn, 'filename':fileName+str(i), 'filepath':filePath, 'fileformat':fileFormat,'startX':x, 'startY':y, 'toX':x+w, 'toY': y+h}}
         # dict.update(item)
     else:
@@ -71,9 +74,9 @@ for (x,y,w,h) in faces:
 
 # Save the modified rectangle image with the detected faces
 if mode == "0" and i > 0:
-    tempfqn = filePath + fileName + '0.' + fileFormat
+    tempfqn = filePath + onlyFileName +'_'+ '.' + fileFormat
     cv2.imwrite(tempfqn, image)
-    l.append({'facepic': {'filefqn':tempfqn, 'filename':fileName+'0', 'filepath':filePath, 'fileformat':fileFormat}})
+    l.append({'facepic': {'filefqn':tempfqn, 'filename':onlyFileName+'_.'+fileFormat, 'filepath':filePath, 'fileformat':fileFormat}})
     #item = {'facepic': {'filefqn':tempfqn, 'filename':fileName+'0', 'filepath':filePath, 'fileformat':fileFormat}}
     #dict.update(item)
 

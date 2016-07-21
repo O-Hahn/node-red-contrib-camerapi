@@ -25,7 +25,7 @@ else:
 # Set the filefqn
 if fileFormat == 'jpeg':
     fileFormat = 'jpg'    
-filefqn = filePath + fileName + "." + fileFormat
+filefqn = filePath + fileName
 
 # Change to the operating folder
 locDir,locName = os.path.split(os.path.abspath(sys.argv[0]))

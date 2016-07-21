@@ -11,7 +11,8 @@ Run the following command in the root directory of your Node-RED install or home
 
 ### Additionally you have to install on the Raspberry Pi 
 
-This Node also utilizes the OpenCV Framework to give some additional capabilities to the photo processing. Therefore you have to install it on your Raspberry Pi. Take a look at this tutorial to see how to install.
+The detect node also utilizes the <b>OpenCV Framework</b> to give some additional capabilities to the photo processing (detect photo). Therefore you have to install it on your Raspberry Pi. 
+Take a look at this <a href="http://www.pyimagesearch.com/2015/07/27/installing-opencv-3-0-for-both-python-2-7-and-python-3-on-your-raspberry-pi-2/" target="_new">tutorial</a> to see how to install.
 
 Don't forget to enable the Raspberry Pi Camera in raspi-config. 
 
@@ -23,11 +24,13 @@ Provides some nodes to take a photo, capture faces and delete them.
 
 ### TakePhoto
 
-This node is to take a photo in a given format directly from the Raspberry Pi Camera. The image of the photo is stored into the file-system and msg.payload will give you the path and the filename including extension to the photo.
+This node is to take a photo in a given format directly from the Raspberry Pi Camera. The image of the photo is stored into the file-system and <b>msg.payload</b> will give you the path and the filename including extension to the photo.
 
 ### DetectFaces
-If you choose the Face-Detection - you will also get in msg.facescount the number of detected faces and a JSON with the necessary information to the detected face (x,y,x+w,y+h) and if in filemode the name, path and format of the file with the face cuttet from the image. 
+
+If you choose the Face-Detection (based on OpenCV Framework) - you will also get in msg.facescount the number of detected faces and a JSON with the necessary information to the detected face (x,y,x+w,y+h) and if in filemode the name, path and format of the file with the face cut from the image. 
 
 ### DeletePhoto
+
 Will delete a taken photo from the given path with or without the extracted faces. 
 
