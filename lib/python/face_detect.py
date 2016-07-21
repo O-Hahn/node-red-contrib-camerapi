@@ -61,24 +61,20 @@ for (x,y,w,h) in faces:
     i = i + 1
     if mode == "1":
         face = image[y:y+h,x:x+w]
-        tempfqn = filePath + onlyFileName + '_face_' + str(i) + '.' + fileFormat
+        tempname = onlyFileName + '_face_' + str(i) + '.' + fileFormat
+        tempfqn = filePath + tempname
         cv2.imwrite(tempfqn, face)
-        l.append({'filefqn':tempfqn, 'filename':onlyFileName+'_face_'+str(i)+'.'+fileFormat, 'filepath':filePath, 'fileformat':fileFormat,'startX':x, 'startY':y, 'toX':x+w, 'toY': y+h})
-        # item = {'face'+str(i): {'filefqn':tempfqn, 'filename':fileName+str(i), 'filepath':filePath, 'fileformat':fileFormat,'startX':x, 'startY':y, 'toX':x+w, 'toY': y+h}}
-        # dict.update(item)
+        l.append({'filefqn':tempfqn, 'filename':tempname, 'filepath':filePath, 'fileformat':fileFormat,'startX':x, 'startY':y, 'toX':x+w, 'toY': y+h})
     else:
         cv2.rectangle(image,(x,y),(x+w,y+h),(255,0,0),2)
         l.append({'startX':x, 'startY':y, 'toX':x+w, 'toY': y+h})
-        #item = {'face'+str(i): {'startX':x, 'startY':y, 'toX':x+w, 'toY': y+h}}
-        #dict.update(item)
 
 # Save the modified rectangle image with the detected faces
 if mode == "0" and i > 0:
-    tempfqn = filePath + onlyFileName +'_faces.' + fileFormat
+    tempname = onlyFileName +'_faces.' + fileFormat
+    tempfqn = filePath + tempname
     cv2.imwrite(tempfqn, image)
-    l.append({'facepic': {'filefqn':tempfqn, 'filename':onlyFileName+'_faces.'+fileFormat, 'filepath':filePath, 'fileformat':fileFormat}})
-    #item = {'facepic': {'filefqn':tempfqn, 'filename':fileName+'0', 'filepath':filePath, 'fileformat':fileFormat}}
-    #dict.update(item)
+    l.append({'facepic': {'filefqn':tempfqn, 'filename':tempname, 'filepath':filePath, 'fileformat':fileFormat}})
 
 # save into JSON
 item = {'faces':l}
