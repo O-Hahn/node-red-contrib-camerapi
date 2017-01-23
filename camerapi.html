@@ -63,6 +63,8 @@
             <option value="2">640x480</option>
             <option value="3">800x600</option>
             <option value="4">1024x768</option>
+            <option value="5">1920x1080</option>
+            <option value="6">2592x1944</option>
 		</select>
     </div>
     <div id="flip" class="form-row flip-row">
@@ -88,6 +90,8 @@
     <p>You could override with <b>msg.filename</b> the filename, with <b>msg.filepath</b> the filepath and <b>msg.fileformat</b> with the fileformat.</p>
 	<p> </p>
 	<p>The node returns in the filemode="1" or "2" <b>msg.payload</b> with the full qualified filepath and filename to the photo stored in a file with extension. </p>
+    <p>Otherwise the <b>msg.payload</b> will contain the photo as an binary object. </p>
+    <p>As default directory you should have a <b>/home/<youruser>/Pictures</b> filedirectory to use <b>msg.filedefpath=0</b> </p>
 </script>
 
 <script type="text/javascript">
@@ -144,135 +148,3 @@
     });
 </script>
 <!-- End of CameraPi Take Photo Node -->
-
-
-<!-- CameraPi Detect-Node -->
-<script type="text/x-red" data-template-name="camerapi-detect">
-    <div class="form-row node-input-filemode">
-         <label for="node-input-filemode"><i class="fa fa-file-image-o"></i> <span data-i18n="camerapi.label.filemode"></span></label>
-	     <select id="node-input-filemode">
-            <option value="1">Filemode</option>
-            <option value="0">Buffermode</option>
-        </select>
-    </div>
-    <div id="filename" class="form-row node-input-filename">
-         <label for="node-input-filename"><i class="fa fa-tag"></i> <span data-i18n="camerapi.label.filename"></span></label>
-		<input type="text" id="node-input-filename" placeholder="Filename with extension">
-    </div>
-    <div id="filedefpath" class="form-row node-input-filedefpath">
-         <label for="node-input-filedefpath"><i class="fa fa-folder"></i> <span data-i18n="camerapi.label.filedefpath"></span></label>
-	     <select id="node-input-filedefpath">
-            <option value="1">Yes</option>
-            <option value="0">No</option>
-        </select>
-    </div>
-    <div id="filepath" class="form-row node-input-filepath">
-         <label for="node-input-filepath"><i class="fa fa-folder"></i> <span data-i18n="camerapi.label.filepath"></span></label>
-		<input type="text" id="node-input-filepath" placeholder="full filepath">
-    </div>
-    <div id="fileformat" class="form-row node-input-fileformat">
-         <label for="node-input-fileformat"><i class="fa fa-file-image-o"></i> <span data-i18n="camerapi.label.fileformat"></span></label>
-	     <select id="node-input-fileformat">
-            <option value="jpeg">JPEG</option>
-            <option value="png">PNG</option>
-            <option value="gif">GIF</option>
-            <option value="bmp">BMP</option>
-            <option value="yuv">YUV</option>
-            <option value="rgb">RGB</option>
-            <option value="rgba">RGBA</option>
-            <option value="bgr">BGR</option>
-            <option value="bgra">BGRA</option>
-        </select>
-    </div>
-    <div class="form-row node-input-detect">
-         <label for="node-input-detect"><i class="fa fa-smile-o"></i> <span data-i18n="camerapi.label.detect"></span></label>
-	     <select id="node-input-detect">
-            <option value="1">Faces</option>
-            <option value="2">Ball</option>
-        </select>
-    </div>
-    <div class="form-row node-input-framesize">
-         <label for="node-input-framesize"><i class="fa fa-smile-o"></i> <span data-i18n="camerapi.label.framesize"></span></label>
-	     <select id="node-input-framesize">
-            <option value="1">15x20 px</option>
-            <option value="2">20x25 px</option>
-            <option value="3">25x30 px</option>
-        </select>
-    </div>
-    <div class="form-row node-input-extract">
-         <label for="node-input-extract"><i class="fa fa-smile-o"></i> <span data-i18n="camerapi.label.extract"></span></label>
-	     <select id="node-input-extract">
-            <option value="1">Yes</option>
-            <option value="0">No</option>
-        </select>
-    </div>
-    <div class="form-row node-input-name">
-        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="camerapi.label.name"></span></label>
-        <input type="text" id="node-input-name" placeholder="Detect node">
-    </div>
-</script>
-
-<script type="text/x-red" data-help-name="camerapi-detect">
-    <p>This Detect Node for Raspberry PI identifies faces or objects in a photo. </p>
-	<p>The <b>msg.filemode</b> indecates if the <b>msg.payload</b> contains the raw image or only the trigger for the image </p>
-	<p>You can override the node-defaults by giving <b>msg.filename</b>, <b>msg.path</b> and <b>msg.format</b> with the necessary informations.</p>
-	<p>The node returns <b>msg.payload</b> with the number of detected faces. </p>
-	<p>In <b>msg.facecount</b> you will get the count of detected faces.</p>
-	<p>If the <b>msg.facecount</b> is not 0 will in <b>msg.faces</b> be an array of filenames to the photoes of the extracted faces. </p>
-</script>
-
-<script type="text/javascript">
-    RED.nodes.registerType('camerapi-detect',{
-        category: 'Raspberry_Pi',
-        color: '#A6BBCF',
-        defaults: {
-            filemode: {value:"1", required:true},
-            filename: {value:"", required:false},
-            filedefpath: {value:"0", required:true},
-            filepath: {value:"", required:false},
-            fileformat: {value:"jpeg", required:true},
-            detect: {value:"1", required:true},
-            framesize: {value:"1", required:true},
-            extract: {value:"1", required:true},
-            name: {value:""}
-        },
-        inputs:1,
-        outputs:1,
-        icon: "photo.png",
-        oneditprepare: function() {
-            $("#node-input-filemode").change(function() {
-                var choose = $("#node-input-filemode").val();
-                console.log(choose);
-                if (choose == "0") {
-                	console.log("FileMode - no");
-                	$("#filename").hide();
-                	$("#filedefpath").hide();
-                	$("#filepath").hide();
-                	$("#fileformat").hide();
-                } else {
-                	console.log("FileMode - yes");
-                	$("#filename").show();
-                	$("#filedefpath").show();
-                	$("#filepath").show();
-                	$("#fileformat").show();
-                }
-            });
-            $("#node-input-filedefpath").change(function() {
-                var choose = $("#node-input-filedefpath").val();
-                console.log(choose);
-                if (choose == "0") {
-                	console.log("FileDefPath - yes");
-                	$("#filepath").show();
-                } else {
-                	console.log("FileDefPath - no");
-                	$("#filepath").hide();
-                }
-            });
-        },
-        label: function() {
-            return this.name || "detect node";
-        }
-    });
-</script>
-<!-- End of CameraPi Detect Faces Node -->
-

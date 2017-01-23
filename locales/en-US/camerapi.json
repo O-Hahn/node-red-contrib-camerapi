@@ -1,33 +1,24 @@
 {
-    "camerapi": {
-        "label": {
-            "camerapi": "CameraPi",
-            "filename": "File Name",
-            "filedefpath": "File default path", 
-            "filepath": "File Path", 
-            "filemode":"File Mode", 
-            "size": "Image Resolution", 
-            "detect" : "Detect",
-            "fileformat": "File Format",
-            "framesize": "Frame Size",
-            "face": "Face", 
-            "object": "Object", 
-            "extract": "Extract Frames", 
+    "camerapi" : {
+        "label" : {
+            "camerapi" : "CameraPi",
+            "filename" : "File Name",
+            "filedefpath" : "File default path", 
+            "filepath" : "File Path", 
+            "filemode" : "File Mode", 
+            "size" : "Image Resolution", 
+            "fileformat" : "File Format",
             "filefqn" : "File Qualified Path and Name", 
-            "res1":"320x240",
-            "res2":"640x480",
-            "res3":"800x600",
-            "res4":"1024x768",
-            "region":"Region",
-            "tendantId":"Tendant Id",
-            "userId":"User Id", 
-            "userName":"User Name", 
-            "password":"Password", 
-            "container":"Container",
-            "name": "Name",
-            "none": "none"
+            "res1" : "320x240",
+            "res2" : "640x480",
+            "res3" : "800x600",
+            "res4" : "1024x768",
+            "res5" : "1920x1080",
+            "res6" : "2592x1944",
+            "name" : "Name",
+            "none" : "none"
         },
-       "errors": {
+       "errors" : {
         }
     }
 }
