@@ -99,7 +99,7 @@
         category: 'Raspberry_Pi',
         color: '#A6BBCF',
         defaults: {
-            filemode: {value:"1", required:true},
+            filemode: {value:"2", required:true},
             filename: {value:"", required:false},
             filedefpath: {value:"0", required:true},
             filepath: {value:"", required:false},
@@ -117,11 +117,17 @@
                 var choose = $("#node-input-filemode").val();
                 console.log(choose);
                 if (choose == "0") {
-                	console.log("FileMode - no");
+                	console.log("Buffermode - yes");
                 	$("#filename").hide();
                 	$("#filedefpath").hide();
                 	$("#filepath").hide();
                 	$("#fileformat").hide();
+                } else if (choose == "2") {
+                	console.log("Generate - yes");
+                	$("#filename").hide();
+                	$("#filedefpath").hide();
+                	$("#filepath").hide();
+                	$("#fileformat").hide();                    
                 } else {
                 	console.log("FileMode - yes");
                 	$("#filename").show();

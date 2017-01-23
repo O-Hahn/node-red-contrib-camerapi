@@ -51,10 +51,12 @@ module.exports = function(RED) {
 		
          	var fsextra = require("fs-extra");
          	var fs = require("fs");
-         	var uuid = require('uuid/v4');
+         	var uuidv4 = require('uuid/v4');
+			var uuid = uuidv4();
 			var os = require('OS');
          	var localdir = __dirname;
-         	var defdir = os.homedir() + '/Pictures';
+			var homedir = os.homedir();
+         	var defdir = homedir + "/Pictures/";
             var cl = "python " + localdir + "/lib/python/get_photo.py";
             var resolution;
             var fileformat;
@@ -78,15 +80,26 @@ module.exports = function(RED) {
          	}
          		
          	if (filemode == "0") {
+				// Buffermode
          		filename = "pic_" + uuid + '.jpg';
          		fileformat = "jepg";
-         		filepath = defdir + "/";
+         		filepath = homedir + "/";
          		filefqn = filepath + filename;
                 if (RED.settings.verbose) { node.log("camerapi takephoto:"+filefqn); }
          		console.log("CameraPi (log): Tempfile - " + filefqn);
 
                 cl += " " + filename + " " + filepath + " " + fileformat;
-         	} else {
+         	} else if (filemode == "2") {
+				// Generate
+         		filename = "pic_" + uuid + '.jpg';
+         		fileformat = "jepg";
+         		filepath = defdir;
+         		filefqn = filepath + filename;
+                if (RED.settings.verbose) { node.log("camerapi takephoto:"+filefqn); }
+         		console.log("CameraPi (log): Generate - " + filefqn);
+
+                cl += " " + filename + " " + filepath + " " + fileformat;
+			 }  else {
 	             if ((msg.filename) && (msg.filename.trim() !== "")) {
 	         			filename = msg.filename;
 	        	} else {
@@ -104,7 +117,7 @@ module.exports = function(RED) {
 	         		if (node.filepath) {
 	         			filepath = node.filepath;
 	         		} else {
-	         			filepath = defdir + "/Pictures/";
+	         			filepath = defdir;
 	         		}
 	         	}
 	 			cl += " "+filepath;
@@ -183,7 +196,7 @@ module.exports = function(RED) {
                 //console.log('[exec] stderr: ' + stderr);
                 if (error !== null) {
                     msg3 = {payload:error};
-					console.error("CameraPi (err): "+ err);
+					console.error("CameraPi (err): "+ error);
                     msg.payload = "";
                     msg.filename = "";
                     msg.fileformat = "";
