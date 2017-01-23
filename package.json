@@ -1,6 +1,6 @@
 {
     "name"         : "node-red-contrib-camerapi",
-    "version"      : "0.0.30",
+    "version"      : "0.0.31",
     "description"  : "Node Red Nodes for getting photos on a raspberry pi with a raspberry pi camera enabled",
     "license"      : "Apache-2.0",
     "main"		   : "camerapi.js",

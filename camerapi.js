@@ -218,6 +218,7 @@ module.exports = function(RED) {
                    		});	           				           			
                     } else {
                         msg.payload = filefqn;
+						console.log("CameraPi (log): " + filefqn + " written with success!")
                     }
                 }
                 
