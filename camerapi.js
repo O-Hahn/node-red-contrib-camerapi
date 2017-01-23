@@ -53,7 +53,7 @@ module.exports = function(RED) {
          	var fs = require("fs");
          	var uuidv4 = require('uuid/v4');
 			var uuid = uuidv4();
-			var os = require('OS');
+			var os = require('os');
          	var localdir = __dirname;
 			var homedir = os.homedir();
          	var defdir = homedir + "/Pictures/";
@@ -82,7 +82,7 @@ module.exports = function(RED) {
          	if (filemode == "0") {
 				// Buffermode
          		filename = "pic_" + uuid + '.jpg';
-         		fileformat = "jepg";
+         		fileformat = "jpeg";
          		filepath = homedir + "/";
          		filefqn = filepath + filename;
                 if (RED.settings.verbose) { node.log("camerapi takephoto:"+filefqn); }
@@ -92,7 +92,7 @@ module.exports = function(RED) {
          	} else if (filemode == "2") {
 				// Generate
          		filename = "pic_" + uuid + '.jpg';
-         		fileformat = "jepg";
+         		fileformat = "jpeg";
          		filepath = defdir;
          		filefqn = filepath + filename;
                 if (RED.settings.verbose) { node.log("camerapi takephoto:"+filefqn); }
