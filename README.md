@@ -8,7 +8,7 @@ Run the following command in the root directory of your Node-RED install or home
 
         npm install node-red-contrib-camerapi
 
-This node was tested on Nodejs V4.x LTS and NPM 2.x on Node-Red. 
+This node was now migrated and tested to Nodejs V6.x LTS and NPM 3.x on Node-Red 0.16. 
 
 ### Additionally you have to install on the Raspberry Pi 
 

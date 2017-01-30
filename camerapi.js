@@ -41,6 +41,10 @@ module.exports = function(RED) {
 		this.resolution =  config.resolution;
 		this.fliph = config.fliph;
 		this.flipv = config.flipv;
+		this.sharpness = config.sharpness;
+		this.brightness = config.brightness;
+		this.contrast = config.contrast;
+		this.image_mode = config.image_mode;
 		this.name =  config.name;
 		this.activeProcesses = {};
 
@@ -65,6 +69,10 @@ module.exports = function(RED) {
             var filemode;
             var filefqn;
             var fliph, flipv;
+			var sharpness;
+			var brightness;
+			var contrast;
+			var image_mode;
 
          	node.status({fill:"green",shape:"dot",text:"connected"});
 
@@ -175,7 +183,55 @@ module.exports = function(RED) {
                  		flipv= "1";	        			         					
          			}
             	}
-         	cl += " " + fliph + " " + flipv;          		
+         	cl += " " + fliph + " " + flipv;
+
+			// brightness
+         	if ((msg.brightness) && (msg.brightness !== "")) {
+         		brightness = msg.brightness; 
+         		} else {
+         			if (node.brightness) {
+                 		brightness = node.brightness;	        			
+         			} else {
+                 		brightness = "0";	        			         					
+         			}
+            	}
+			cl += " " + brightness;          		
+
+			// contrast
+         	if ((msg.contrast) && (msg.contrast !== "")) {
+         		contrast = msg.contrast; 
+         		} else {
+         			if (node.contrast) {
+                 		contrast = node.contrast;	        			
+         			} else {
+                 		contrast = "0";	        			         					
+         			}
+            	}
+			cl += " " + contrast;          		
+
+			// sharpness
+         	if ((msg.sharpness) && (msg.sharpness !== "")) {
+         		sharpness = msg.sharpness; 
+         		} else {
+         			if (node.sharpness) {
+                 		sharpness = node.sharpness;	        			
+         			} else {
+                 		sharpness = "0";	        			         					
+         			}
+            	}
+			cl += " " + sharpness;          		
+
+			// image_mode
+         	if ((msg.image_mode) && (msg.image_mode !== "")) {
+         		image_mode = msg.image_mode; 
+         		} else {
+         			if (node.image_mode) {
+                 		image_mode = node.image_mode;	        			
+         			} else {
+                 		image_mode = "none";	        			         					
+         			}
+            	}
+			cl += " " + image_mode;          		
 
          	if (RED.settings.verbose) { node.log(cl); }
             
