@@ -214,7 +214,7 @@ module.exports = function(RED) {
          			if (node.brightness) {
                  		brightness = node.brightness;	        			
          			} else {
-                 		brightness = "0";	        			         					
+                 		brightness = 50;	        			         					
          			}
             	}
 			cl += " " + brightness;          		
@@ -226,7 +226,7 @@ module.exports = function(RED) {
          			if (node.contrast) {
                  		contrast = node.contrast;	        			
          			} else {
-                 		contrast = "0";	        			         					
+                 		contrast = 0;	        			         					
          			}
             	}
 			cl += " " + contrast;          		
@@ -238,7 +238,7 @@ module.exports = function(RED) {
          			if (node.sharpness) {
                  		sharpness = node.sharpness;	        			
          			} else {
-                 		sharpness = "0";	        			         					
+                 		sharpness = 0;	        			         					
          			}
             	}
 			cl += " " + sharpness;          		
