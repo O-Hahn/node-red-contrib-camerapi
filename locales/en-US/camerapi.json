@@ -10,6 +10,7 @@
             "fileformat" : "File Format",
             "filefqn" : "File Qualified Path and Name", 
             "brightness" : "Brightness",
+            "rotation" : "Rotation",
             "contrast" : "Contrast",
             "sharpness" : "Sharpness",
             "res1" : "320x240",

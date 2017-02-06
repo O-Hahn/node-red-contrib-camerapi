@@ -67,6 +67,14 @@
             <option value="6">2592x1944</option>
 		</select>
     </div>
+    <div class="form-row node-input-rotation">
+         <label for="node-input-rotation"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.rotation"></span></label>
+	     <select id="node-input-rotation">
+            <option value="0">0</option>
+            <option value="90">90</option>
+            <option value="180">180</option>
+            <option value="270">270</option>
+    </div>
     <div id="flip" class="form-row flip-row">
         <label for="node-input-fliph"<i class="fa fa-repeat"></i> Flip Picture</label>
         <select style="width: 80px" id="node-input-fliph">
@@ -143,6 +151,7 @@
             filepath: {value:"", required:false},
             fileformat: {value:"jpeg", required:true},
             resolution: {value:"1", required:true},
+            rotation : {value:"0", required:true},
             fliph: {value:"0", required:true},
             flipv: {value:"0", required:true},
             brightness: {value:"0", required:true},

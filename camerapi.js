@@ -39,6 +39,7 @@ module.exports = function(RED) {
 		this.filepath = config.filepath;
 		this.fileformat = config.fileformat;
 		this.resolution =  config.resolution;
+		this.rotation = config.rotation;
 		this.fliph = config.fliph;
 		this.flipv = config.flipv;
 		this.sharpness = config.sharpness;
@@ -73,6 +74,7 @@ module.exports = function(RED) {
 			var brightness;
 			var contrast;
 			var image_mode;
+			var rotation;
 
          	node.status({fill:"green",shape:"dot",text:"connected"});
 
@@ -165,6 +167,19 @@ module.exports = function(RED) {
              	cl += " 2592 1944";          		
          	}
 
+			// rotation
+         	if ((msg.rotation) && (msg.rotation !== "")) {
+         		rotation = msg.rotation; 
+         		} else {
+         			if (node.rotation) {
+                 		rotation = node.rotation;	        			
+         			} else {
+                 		rotation = "0";	        			         					
+         			}
+            	}
+			cl += " " + rotation;          		
+
+			// hflip and vflip 
          	if ((msg.fliph) && (msg.fliph !== "")) {
          		fliph = msg.fliph; 
          		} else {
