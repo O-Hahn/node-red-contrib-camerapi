@@ -15,7 +15,7 @@ vflip = sys.argv[8]
 brightness = sys.argv[9]
 contrast = sys.argv[10]
 sharpness = sys.argv[11]
-image_effect = sys.argv[12]
+imageeffect = sys.argv[12]
 
 # consider jpeg
 if fileFormat == "jpg":
@@ -48,13 +48,13 @@ picfile = open(filefqn, 'wb')
 # take the photo
 with picamera.PiCamera() as camera:
         camera.resolution = (int(resolutionX), int(resolutionY))
-        carmer.rotation = rotation
+        camera.rotation = rotation
         camera.hflip = hflip
         camera.vflip = vflip
         camera.brightness = brightness
         camera.sharpness = sharpness
         camera.contrast = contrast
-        camera.image_effect = image_effect
+        camera.image_effect = imageeffect
         camera.capture(picfile, i_format)
 
 # flush the buffer

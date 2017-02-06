@@ -13,7 +13,7 @@
             "rotation" : "Rotation",
             "contrast" : "Contrast",
             "sharpness" : "Sharpness",
-            "image_effect" : "Image Effect",
+            "imageeffect" : "Image Effect",
             "res1" : "320x240",
             "res2" : "640x480",
             "res3" : "800x600",
