@@ -110,6 +110,7 @@ module.exports = function(RED) {
 
                 cl += " " + filename + " " + filepath + " " + fileformat;
 			 }  else {
+				 // Specified FileName 
 	             if ((msg.filename) && (msg.filename.trim() !== "")) {
 	         			filename = msg.filename;
 	        	} else {
@@ -121,15 +122,19 @@ module.exports = function(RED) {
 	        	}
 	 			cl += " "+filename;
 	
-	         	if ((msg.filepath) && (msg.filepath.trim() !== "")) {
-	     			filepath = msg.filepath;
-	         	} else {
-	         		if (node.filepath) {
-	         			filepath = node.filepath;
-	         		} else {
-	         			filepath = defdir;
-	         		}
-	         	}
+				if (node.filedefpath == "1" ) {
+					filepath = defdir;
+				} else {
+					if ((msg.filepath) && (msg.filepath.trim() !== "")) {
+						filepath = msg.filepath;
+					} else {
+						if (node.filepath) {
+							filepath = node.filepath;
+						} else {
+							filepath = defdir;
+						}
+					}
+				}
 	 			cl += " "+filepath;
 	     		
 	         	if ((msg.fileformat) && (msg.fileformat.trim() !== "")) {
@@ -142,8 +147,10 @@ module.exports = function(RED) {
 	         		}
 	         	}
 	 			cl += " "+fileformat;         		
+                if (RED.settings.verbose) { node.log("camerapi takephoto:"+filefqn); }
          	}
          	
+			 // Resulution of the image
          	if ((msg.resolution) && (msg.resolution !== "")) {
          		resolution = msg.resolution; 
          		} else {
