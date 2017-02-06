@@ -45,7 +45,7 @@ module.exports = function(RED) {
 		this.sharpness = config.sharpness;
 		this.brightness = config.brightness;
 		this.contrast = config.contrast;
-		this.image_mode = config.image_mode;
+		this.imageeffect = config.imageeffect;
 		this.name =  config.name;
 		this.activeProcesses = {};
 
@@ -73,7 +73,7 @@ module.exports = function(RED) {
 			var sharpness;
 			var brightness;
 			var contrast;
-			var image_mode;
+			var imageeffect;
 			var rotation;
 
          	node.status({fill:"green",shape:"dot",text:"connected"});
@@ -236,17 +236,17 @@ module.exports = function(RED) {
             	}
 			cl += " " + sharpness;          		
 
-			// image_mode
-         	if ((msg.image_mode) && (msg.image_mode !== "")) {
-         		image_mode = msg.image_mode; 
+			// imageeffect
+         	if ((msg.imageeffect) && (msg.imageeffect !== "")) {
+         		imageeffect = msg.imageeffect; 
          		} else {
-         			if (node.image_mode) {
-                 		image_mode = node.image_mode;	        			
+         			if (node.imageeffect) {
+                 		imageeffect = node.imageeffect;	        			
          			} else {
-                 		image_mode = "none";	        			         					
+                 		imageeffect = "none";	        			         					
          			}
             	}
-			cl += " " + image_mode;          		
+			cl += " " + imageeffect;          		
 
          	if (RED.settings.verbose) { node.log(cl); }
             

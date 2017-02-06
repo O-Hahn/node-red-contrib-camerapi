@@ -74,6 +74,7 @@
             <option value="90">90</option>
             <option value="180">180</option>
             <option value="270">270</option>
+		</select>
     </div>
     <div id="flip" class="form-row flip-row">
         <label for="node-input-fliph"<i class="fa fa-repeat"></i> Flip Picture</label>
@@ -98,9 +99,9 @@
          <label for="node-input-sharpness"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.sharpness"></span></label>
 		<input type="number" id="sharpness" placeholder="-100 to 100" min="-100" max="100" >
     </div>
-    <div class="form-row node-input-image_effect">
-         <label for="node-input-image_effect"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.image_effect"></span></label>
-	     <select id="node-input-image_effect">
+    <div class="form-row node-input-imageeffect">
+         <label for="node-input-imageeffect"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.imageeffect"></span></label>
+	     <select id="node-input-imageeffect">
             <option value="none">none</option>
             <option value="negative">negative</option>
             <option value="solarize">solarize</option>
@@ -157,7 +158,7 @@
             brightness: {value:"0", required:true},
             contrast: {value:"0", required:true},
             sharpness: {value:"0", required:true},
-            image_effect: {value:"none", required:true},
+            imageeffect: {value:"none", required:true},
             name: {value:""}
         },
         inputs:1,
