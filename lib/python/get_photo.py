@@ -12,9 +12,9 @@ resolutionY = sys.argv[5]
 rotation = sys.argv[6]
 hflip = sys.argv[7]
 vflip = sys.argv[8]
-brightness = sys.argv[9]
-contrast = sys.argv[10]
-sharpness = sys.argv[11]
+brightness = int(sys.argv[9])
+contrast = int(sys.argv[10])
+sharpness = int(sys.argv[11])
 imageeffect = sys.argv[12]
 
 # consider jpeg
