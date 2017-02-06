@@ -89,15 +89,15 @@
     </div>
     <div class="form-row node-input-brightness">
          <label for="node-input-brightness"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.brightness"></span></label>
-		<input type="text" id="brightness" placeholder="0 to 100, default 50" >
+		 <input type="text" id="brightness" placeholder="0 to 100" >
     </div>
     <div class="form-row node-input-contrast">
          <label for="node-input-contrast"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.contrast"></span></label>
-		<input type="text" id="contrast" placeholder="-100 to 100, default 0" >
+		 <input type="text" id="contrast" placeholder="-100 to 100" >
     </div>
     <div class="form-row node-input-sharpness">
          <label for="node-input-sharpness"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.sharpness"></span></label>
-		<input type="text" id="sharpness" placeholder="-100 to 100, default 0" >
+		 <input type="text" id="sharpness" placeholder="-100 to 100" >
     </div>
     <div class="form-row node-input-imageeffect">
          <label for="node-input-imageeffect"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.imageeffect"></span></label>
@@ -155,9 +155,9 @@
             rotation : {value:"0", required:true},
             fliph: {value:"0", required:true},
             flipv: {value:"0", required:true},
-            brightness: {value:"50", required:true, validate:RED.validators.number()},
-            contrast: {value:"0", required:true, validate:RED.validators.number()},
-            sharpness: {value:"0", required:true, validate:RED.validators.number()},
+            brightness: {value:"50", required:true},
+            contrast: {value:"0", required:true},
+            sharpness: {value:"0", required:true},
             imageeffect: {value:"none", required:true},
             name: {value:""}
         },
