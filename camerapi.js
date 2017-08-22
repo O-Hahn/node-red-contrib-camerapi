@@ -75,6 +75,7 @@ module.exports = function(RED) {
 			var brightness;
 			var contrast;
 			var imageeffect;
+			var agcwait;
 			var rotation;
 
 			node.status({fill:"green",shape:"dot",text:"connected"});
