@@ -125,6 +125,10 @@
             <option value="deinterlace2">deinterlace2</option>
 		</select>
     </div>
+    <div class="form-row node-input-agcwait">
+         <label for="node-input-agcwait"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.agcwait"></span></label>
+         <input type="text" id="node-input-agcwait" placeholder="0.0 to 1.0" >
+    </div>
     <div class="form-row node-input-name">
         <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="camerapi.label.name"></span></label>
         <input type="text" id="node-input-name" placeholder="Take photo node">
@@ -139,6 +143,7 @@
 	<p>The node returns in the filemode="1" or "2" <b>msg.payload</b> with the full qualified filepath and filename to the photo stored in a file with extension. </p>
     <p>Otherwise the <b>msg.payload</b> will contain the photo as an binary object. </p>
     <p>As default directory you should have a <b>/home/pi/Pictures</b> filedirectory to use <b>msg.filedefpath=0</b> </p>
+    <p>To ensure correct exposure, a delay is required between instantiating the camera and taking the picture - set how long you want this delay to be with the agcwait parameter (default 0.3s).</p>
 </script>
 
 <script type="text/javascript">
