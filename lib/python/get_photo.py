@@ -16,7 +16,7 @@ brightness = int(sys.argv[9])
 contrast = int(sys.argv[10])
 sharpness = int(sys.argv[11])
 imageeffect = sys.argv[12]
-agcwait = sys.argv[13]
+agcwait = float(sys.argv[13])
 
 # consider jpeg
 if fileFormat == "jpg":
