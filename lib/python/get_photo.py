@@ -17,6 +17,8 @@ contrast = int(sys.argv[10])
 sharpness = int(sys.argv[11])
 imageeffect = sys.argv[12]
 agcwait = float(sys.argv[13])
+quality = int(sys.argv[14])
+led = bool(sys.argv[15])
 
 # consider jpeg
 if fileFormat == "jpg":
@@ -56,6 +58,11 @@ with picamera.PiCamera() as camera:
         camera.sharpness = sharpness
         camera.contrast = contrast
         camera.image_effect = imageeffect
+        camera.led = led
+        
+        if i_format == "jpeg":
+            camera.quality = quality
+            
         time.sleep(agcwait)
         camera.capture(picfile, i_format)
 
