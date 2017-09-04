@@ -60,11 +60,14 @@ with picamera.PiCamera() as camera:
         camera.image_effect = imageeffect
         camera.led = led
         
-        if i_format == "jpeg":
-            camera.quality = quality
-            
         time.sleep(agcwait)
-        camera.capture(picfile, i_format)
+        
+        if i_format == "jpeg":
+            camera.capture(picfile, i_format, quality=quality)
+        else:
+            camera.capture(picfile, i_format)
+            
+        
 
 # flush the buffer
 picfile.close()
