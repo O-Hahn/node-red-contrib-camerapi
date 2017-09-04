@@ -18,7 +18,7 @@ sharpness = int(sys.argv[11])
 imageeffect = sys.argv[12]
 agcwait = float(sys.argv[13])
 quality = int(sys.argv[14])
-led = bool(sys.argv[15])
+led = True if int(sys.argv[15]) == 1 else False
 
 # consider jpeg
 if fileFormat == "jpg":
