@@ -292,7 +292,7 @@ module.exports = function(RED) {
 					if (node.led) {
 						led = node.led;
 					} else {
-						led = True;					
+						led = 1;					
 					}
 				}
 			cl += " " + led;
