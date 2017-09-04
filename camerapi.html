@@ -99,35 +99,20 @@
          <label for="node-input-sharpness"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.sharpness"></span></label>
 		 <input type="text" id="node-input-sharpness" placeholder="-100 to 100" >
     </div>
-    <div class="form-row node-input-imageeffect">
-         <label for="node-input-imageeffect"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.imageeffect"></span></label>
-	     <select id="node-input-imageeffect">
-            <option value="none">none</option>
-            <option value="negative">negative</option>
-            <option value="solarize">solarize</option>
-            <option value="sketch">sketch</option>
-            <option value="denoise">denoise</option>
-            <option value="emboss">emboss</option>
-            <option value="oilpaint">oilpaint</option>
-            <option value="hatch">hatch</option>
-            <option value="gpen">gpen</option>
-            <option value="pastel">pastel</option>
-            <option value="watercolor">watercolor</option>
-            <option value="blur">blur</option>
-            <option value="saturation">saturation</option>
-            <option value="colorswap">colorswap</option>
-            <option value="washedout">washedout</option>
-            <option value="posterise">posterise</option>
-            <option value="colorpoint">colorpoint</option>
-            <option value="colorbalance">colorbalance</option>
-            <option value="cartoon">cartoon</option>
-            <option value="deinterlace1">deinterlace1</option>
-            <option value="deinterlace2">deinterlace2</option>
-		</select>
-    </div>
     <div class="form-row node-input-agcwait">
          <label for="node-input-agcwait"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.agcwait"></span></label>
-         <input type="text" id="node-input-agcwait" placeholder="0.0 to 1.0" >
+		 <input type="text" id="node-input-agcwait" placeholder="0.3" >
+    </div>
+    <div class="form-row node-input-quality">
+         <label for="node-input-quality"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.quality"></span></label>
+		 <input type="text" id="node-input-quality" placeholder="80" >
+    </div>
+    <div class="form-row node-input-led">
+         <label for="node-input-led"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.led"></span></label>
+	 <select id="node-input-led">
+            <option value="True">On</option>
+            <option value="False">Off</option>
+	</select>
     </div>
     <div class="form-row node-input-name">
         <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="camerapi.label.name"></span></label>
@@ -144,6 +129,8 @@
     <p>Otherwise the <b>msg.payload</b> will contain the photo as an binary object. </p>
     <p>As default directory you should have a <b>/home/pi/Pictures</b> filedirectory to use <b>msg.filedefpath=0</b> </p>
     <p>To ensure correct exposure, a delay is required between instantiating the camera and taking the picture - set how long you want this delay to be with the agcwait parameter (default 0.3s).</p>
+    <p>If the image format is set to "JPEG", the "quality" parameter can be used to control the amount of JPEG compression applied (0-100, with 100 resulting in the least compression). If not specified, quality defaults to 80. This parameter is ignored for other image formats.</p>
+    <p>The camera LED can be controlled with the "LED" parameter. When set to "On" (True, default), the camera's LED will be activated during the capture.</p>
 </script>
 
 <script type="text/javascript">
@@ -165,6 +152,8 @@
             sharpness: {value:"0", required:true},
             imageeffect: {value:"none", required:true},
             agcwait: {value:"0.3", required:true},
+            quality: {value:"80", required:true},
+            led: {value:"True", required:true},
             name: {value:""}
         },
         inputs:1,
