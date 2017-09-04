@@ -99,9 +99,35 @@
          <label for="node-input-sharpness"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.sharpness"></span></label>
 		 <input type="text" id="node-input-sharpness" placeholder="-100 to 100" >
     </div>
+    <div class="form-row node-input-imageeffect">
+         <label for="node-input-imageeffect"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.imageeffect"></span></label>
+         <select id="node-input-imageeffect">
+            <option value="none">none</option>
+            <option value="negative">negative</option>
+            <option value="solarize">solarize</option>
+            <option value="sketch">sketch</option>
+            <option value="denoise">denoise</option>
+            <option value="emboss">emboss</option>
+            <option value="oilpaint">oilpaint</option>
+            <option value="hatch">hatch</option>
+            <option value="gpen">gpen</option>
+            <option value="pastel">pastel</option>
+            <option value="watercolor">watercolor</option>
+            <option value="blur">blur</option>
+            <option value="saturation">saturation</option>
+            <option value="colorswap">colorswap</option>
+            <option value="washedout">washedout</option>
+            <option value="posterise">posterise</option>
+            <option value="colorpoint">colorpoint</option>
+            <option value="colorbalance">colorbalance</option>
+            <option value="cartoon">cartoon</option>
+            <option value="deinterlace1">deinterlace1</option>
+            <option value="deinterlace2">deinterlace2</option>
+        </select>
+    </div>
     <div class="form-row node-input-agcwait">
          <label for="node-input-agcwait"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.agcwait"></span></label>
-		 <input type="text" id="node-input-agcwait" placeholder="0.3" >
+		 <input type="text" id="node-input-agcwait" placeholder="0.0 to 1.0" >
     </div>
     <div class="form-row node-input-quality">
          <label for="node-input-quality"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.quality"></span></label>
