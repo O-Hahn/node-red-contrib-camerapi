@@ -47,6 +47,8 @@ module.exports = function(RED) {
 		this.contrast = config.contrast;
 		this.imageeffect = config.imageeffect;
 		this.agcwait = config.agcwait;
+		this.quality = config.quality;
+		this.led = config.led;
 		this.name =  config.name;
 		this.activeProcesses = {};
 
@@ -76,6 +78,8 @@ module.exports = function(RED) {
 			var contrast;
 			var imageeffect;
 			var agcwait;
+			var quality;
+			var led;
 			var rotation;
 
 			node.status({fill:"green",shape:"dot",text:"connected"});
@@ -268,6 +272,30 @@ module.exports = function(RED) {
 					}
 				}
 			cl += " " + agcwait;
+			
+			// jpeg quality
+			if ((msg.quality) && (msg.quality !== "")) {
+				quality = msg.quality;
+				} else {
+					if (node.quality) {
+						quality = node.quality;
+					} else {
+						quality = 80;					
+					}
+				}
+			cl += " " + quality;
+			
+			// led on/off
+			if ((msg.led) && (msg.led !== "")) {
+				led = msg.led;
+				} else {
+					if (node.led) {
+						led = node.led;
+					} else {
+						led = 1;					
+					}
+				}
+			cl += " " + led;
 
 			if (RED.settings.verbose) { node.log(cl); }
 
