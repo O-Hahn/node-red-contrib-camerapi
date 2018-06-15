@@ -166,7 +166,7 @@
         defaults: {
             filemode: {value:"2", required:true},
             filename: {value:"", required:false},
-            filedefpath: {value:"0", required:true},
+            filedefpath: {value:"1", required:true},
             filepath: {value:"", required:false},
             fileformat: {value:"jpeg", required:true},
             resolution: {value:"1", required:true},
@@ -192,6 +192,8 @@
                 if (choose == "0") {
                 	console.log("Buffermode - yes");
                 	$("#filename").hide();
+                    $("#node-input-filedefpath").val("1");
+                    $("#node-input-filepath").val("");
                 	$("#filedefpath").hide();
                 	$("#filepath").hide();
                 	$("#fileformat").hide();
@@ -199,13 +201,13 @@
                 	console.log("Generate - yes");
                 	$("#filename").hide();
                     $("#node-input-filedefpath").val("1");
+                    $("#node-input-filepath").val("");
                 	$("#filedefpath").hide();
                 	$("#filepath").hide();
                 	$("#fileformat").hide();                    
                 } else {
                 	console.log("FileMode - yes");
                 	$("#filename").show();
-                    $("#node-input-filedefpath").val("1");
                 	$("#filedefpath").show();
                 	$("#filepath").hide();
                 	$("#fileformat").show();
@@ -220,6 +222,7 @@
                 } else {
                 	console.log("FileDefPath - yes");
                 	$("#filepath").hide();
+                    $("#node-input-filepath").val("");
                 }
             });
         },

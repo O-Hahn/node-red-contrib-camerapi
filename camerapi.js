@@ -354,8 +354,15 @@ module.exports = function(RED) {
 		});
 
 		// CameraPi-TakePhoto has a close
-		node.on("close", function(done) {
-			node.closing = true;
+		// New function signature function(removed, done) included in Node-Red 0.17
+		node.on("close", function(removed, done) {
+			if (removed) {
+				// This node has been deleted
+				node.closing = true;
+			}
+			else {
+				// This node is being restarted
+			}
 			done();
 		});
 	}

@@ -6,7 +6,7 @@
             "filedefpath" : "File default path", 
             "filepath" : "File Path", 
             "filemode" : "File Mode", 
-            "size" : "Image Resolution", 
+            "resolution" : "Image Resolution", 
             "fileformat" : "File Format",
             "filefqn" : "File Qualified Path and Name", 
             "brightness" : "Brightness",
