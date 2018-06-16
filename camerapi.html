@@ -22,9 +22,9 @@
     <div class="form-row node-input-filemode">
          <label for="node-input-filemode"><i class="fa fa-file-image-o"></i> <span data-i18n="camerapi.label.filemode"></span></label>
 	     <select id="node-input-filemode">
-            <option value="2">Generate</option>
-            <option value="1">Filemode</option>
-            <option value="0">Buffermode</option>
+            <option value="2">Auto file name</option>
+            <option value="1">Custom file name</option>
+            <option value="0">Buffered</option>
         </select>
     </div>
     <div id="filename" class="form-row node-input-filename">
@@ -40,7 +40,7 @@
     </div>
     <div id="filepath" class="form-row node-input-filepath">
          <label for="node-input-filepath"><i class="fa fa-folder"></i> <span data-i18n="camerapi.label.filepath"></span></label>
-		<input type="text" id="node-input-filepath" placeholder="full filepath">
+		 <input type="text" id="node-input-filepath" placeholder="full filepath">
     </div>
     <div id="fileformat" class="form-row node-input-fileformat">
          <label for="node-input-fileformat"><i class="fa fa-file-image-o"></i> <span data-i18n="camerapi.label.fileformat"></span></label>
@@ -77,11 +77,13 @@
 		</select>
     </div>
     <div id="flip" class="form-row flip-row">
-        <label for="node-input-fliph"><i class="fa fa-repeat"></i> Flip Picture</label>
+        <label for="node-input-fliph"><i class="fa fa-repeat"></i> <span data-i18n="camerapi.label.flip"></span></label>
+        <span data-i18n="camerapi.label.hflip"></span>
         <select style="width: 80px" id="node-input-fliph">
             <option value="0">No</option>
             <option value="1">Yes</option>
-        </select>
+        </select>&nbsp;
+        <span data-i18n="camerapi.label.vflip"></span>
         <select style="width: 80px" id="node-input-flipv">
             <option value="0">No</option>
             <option value="1">Yes</option>
@@ -135,10 +137,10 @@
     </div>
     <div class="form-row node-input-led">
          <label for="node-input-led"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.led"></span></label>
-	 <select id="node-input-led">
-            <option value="1">On</option>
-            <option value="0">Off</option>
-	</select>
+	     <select id="node-input-led">
+             <option value="1">On</option>
+             <option value="0">Off</option>
+	     </select>
     </div>
     <div class="form-row node-input-name">
         <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="camerapi.label.name"></span></label>
@@ -147,16 +149,70 @@
 </script>
 
 <script type="text/x-red" data-help-name="camerapi-takephoto">
-    <p>If the Camera Pi Node for the Raspberry Pi Camera is triggered - it will take a photo with the given resolution and format. </p>
-	<p>The Filemode (as "2" for gernerate Filename - "1" for set filename or "0" for no file and buffer mode) or filled in <b>msg.filemode</b> indicates if the picture is taken and put into a file or into <b>msg.payload</b> as an raw image. </p>
-    <p>You could override with <b>msg.filename</b> the filename, with <b>msg.filepath</b> the filepath and <b>msg.fileformat</b> with the fileformat.</p>
-	<p> </p>
-	<p>The node returns in the filemode="1" or "2" <b>msg.payload</b> with the full qualified filepath and filename to the photo stored in a file with extension. </p>
-    <p>Otherwise the <b>msg.payload</b> will contain the photo as an binary object. </p>
-    <p>As default directory you should have a <b>/home/pi/Pictures</b> filedirectory to use <b>msg.filedefpath=0</b> </p>
-    <p>To ensure correct exposure, a delay is required between instantiating the camera and taking the picture - set how long you want this delay to be with the agcwait parameter (default 0.3s).</p>
-    <p>If the image format is set to "JPEG", the "quality" parameter can be used to control the amount of JPEG compression applied (0-100, with 100 resulting in the least compression). If not specified, quality defaults to 80. This parameter is ignored for other image formats.</p>
-    <p>The camera LED can be controlled with the "LED" parameter. When set to "On" (1, default), the camera's LED will be activated during the capture.</p>
+    <p>Takes picture using the Raspberry Pi camera module.</p>
+    <p>Requires a Raspberry Pi camera module and picamera Python library</p>
+
+    <h3>Inputs</h3>
+        <dl class="message-properties">
+            <dt class="optional">msg.filemode
+                <span class="property-type">string</span>
+            </dt>
+            <dd>Overrides the File Mode defined in node editor.</dd>
+            <dt class="optional">msg.filename
+                <span class="property-type">string</span>
+            </dt>
+            <dd>Overrides the File Name defined in node editor.</dd>
+            <dt class="optional">msg.filepath
+                <span class="property-type">string</span>
+            </dt>
+            <dd>Overrides the File Path defined in node editor.</dd>
+            <dt class="optional">msg.fileformat
+                <span class="property-type">string</span>
+            </dt>
+            <dd>Overrides the File Format defined in node editor.</dd>
+        </dl>
+
+    <h3>Outputs</h3>
+        <ol class="node-ports">
+            <li>Standard output
+                <dl class="message-properties">
+                    <dt>payload <span class="property-type">string</span></dt>
+                    <dd>
+                        <p>For filemode "0" (buffered mode), payload contains the raw image as a binary object.</p>
+                        <p>For filemode "1" (custom file name) and "2" (auto file name), payload contains the fully qualified file name.</p>
+                    </dd>
+                </dl>
+            </li>
+        </ol>
+
+    <h3>Details</h3>
+        <p>File Mode indicates the operation mode, which can be:
+            <ol type = "1" start = "0">
+                <li>Buffered mode - the raw image will be sent to the next node(s) in <code>msg.payload</code></li>
+                <li>Custom file name - the image will be stored in a file with the specified file name.</li>
+                <li>Auto file name - the image will be stored in a file and its name automatically generated.</li>
+            </ol>
+        </p>
+        <p>File Name defines the name of the file in which the node will save the photo, if File Mode is "Custom file name".</p>
+        <p>File Default Path, when set to Yes (<code>msg.filedefpath = "1"</code>), will save all photos in the default folder (/home/pi/Pictures), therefore, make sure the directory is created and node-red process has permission to write files.</p>
+        <p>File Path specifies the path where photos are saved, when File Default Path is No (<code>msg.filedefpath = "0")</code>).</p>
+        <p>File Format defines the format of the file. The following formats are supported: JPEG (default), PNG, GIF, BMP, YUV, RGB, RGBA, BGR, BGRA.</p>
+        <p>Resolution, the image resolution in pixels.</p>
+        <p>Rotation, rotates the image (in degrees).</p>
+        <p>Image Flip, flips image horizontally and vertically, independently.</p>
+        <p>Brightness ajusts the brightness of the camera as an number from 0 to 100 (default 50).</p>
+        <p>Contrast sets the contrast level as an number from -100 to 100 (default 0).</p>
+        <p>Sharpness adjusts the sharpness of the camera, a measure of the amount of post-processing to reduce or increase image sharpness. Ranges from -100 to 100 (default 0).</p>
+        <p>Image Effect</p>
+        <p>Wait for AGC is the delay between camera initialization and shooting. Proper wait time is important to let the camera sensors adapt to the scene and set correct exposure (default 0.3s).</p>
+        <p>Quality is used to control JPEG compression (from 0 - low quality and high compression; to 100, high quality and low compression). Quality is ignored by all other image formats but JPEG.</p>
+        <p>LED controls the state of the camera's LED via GPIO - "1" On and "0" Off (default "On"). At the present moment, the camera's LED cannot be controlled on the Pi 3, which had GPIOs re-routed to the GPIO expander, but it's typically used on the Compute Module platform.</p>
+
+    <h3>Reference</h3>
+        <ul>
+            <li><a href="https://www.raspberrypi.org/documentation/hardware/camera/README.md" target="_blank">Camera module v2</a></li>
+            <li><a href="https://picamera.readthedocs.io/en/release-1.13/index.html" target="_blank">picamera</a></li>
+        </ul>
 </script>
 
 <script type="text/javascript">
