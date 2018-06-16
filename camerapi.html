@@ -58,13 +58,17 @@
     </div>
     <div class="form-row node-input-resolution">
          <label for="node-input-resolution"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.resolution"></span></label>
-	     <select id="node-input-resolution">
+	     <select id="node-input-resolution" value="10">
             <option value="1">320x240</option>
             <option value="2">640x480</option>
             <option value="3">800x600</option>
             <option value="4">1024x768</option>
-            <option value="5">1920x1080</option>
-            <option value="6">2592x1944</option>
+            <option value="5">1280x720</option>
+            <option value="6">1640x922</option>
+            <option value="7">1640x1232</option>
+            <option value="8">1920x1080</option>
+            <option value="9">2592x1944</option>
+            <option value="10">3280x2464 (v2 camera)</option>
 		</select>
     </div>
     <div class="form-row node-input-rotation">
@@ -194,7 +198,7 @@
             </ol>
         </p>
         <p>File Name defines the name of the file in which the node will save the photo, if File Mode is "Custom file name".</p>
-        <p>File Default Path, when set to Yes (<code>msg.filedefpath = "1"</code>), will save all photos in the default folder (/home/pi/Pictures), therefore, make sure the directory is created and node-red process has permission to write files.</p>
+        <p>File Default Path, when set to Yes (<code>msg.filedefpath = "1"</code>), will save all photos in the default folder (~/Pictures), therefore, make sure the directory is created and node-red process has permission to write files.</p>
         <p>File Path specifies the path where photos are saved, when File Default Path is No (<code>msg.filedefpath = "0")</code>).</p>
         <p>File Format defines the format of the file. The following formats are supported: JPEG (default), PNG, GIF, BMP, YUV, RGB, RGBA, BGR, BGRA.</p>
         <p>Resolution, the image resolution in pixels.</p>
@@ -205,7 +209,7 @@
         <p>Sharpness adjusts the sharpness of the camera, a measure of the amount of post-processing to reduce or increase image sharpness. Ranges from -100 to 100 (default 0).</p>
         <p>Image Effect</p>
         <p>Wait for AGC is the delay between camera initialization and shooting. Proper wait time is important to let the camera sensors adapt to the scene and set correct exposure (default 0.3s).</p>
-        <p>Quality is used to control JPEG compression (from 0 - low quality and high compression; to 100, high quality and low compression). Quality is ignored by all other image formats but JPEG.</p>
+        <p>Quality is used to control JPEG compression (from 0 - low quality and high compression; to 100 - high quality and no compression). Quality is ignored by all other image formats but JPEG (default 80).</p>
         <p>LED controls the state of the camera's LED via GPIO - "1" On and "0" Off (default "On"). At the present moment, the camera's LED cannot be controlled on the Pi 3, which had GPIOs re-routed to the GPIO expander, but it's typically used on the Compute Module platform.</p>
 
     <h3>Reference</h3>
@@ -225,7 +229,7 @@
             filedefpath: {value:"1", required:true},
             filepath: {value:"", required:false},
             fileformat: {value:"jpeg", required:true},
-            resolution: {value:"1", required:true},
+            resolution: {value:"10", required:true},
             rotation : {value:"0", required:true},
             fliph: {value:"0", required:true},
             flipv: {value:"0", required:true},
