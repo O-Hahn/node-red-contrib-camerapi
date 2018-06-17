@@ -119,6 +119,7 @@
             <option value="gpen">gpen</option>
             <option value="pastel">pastel</option>
             <option value="watercolor">watercolor</option>
+            <option value="film">film</option>
             <option value="blur">blur</option>
             <option value="saturation">saturation</option>
             <option value="colorswap">colorswap</option>
@@ -161,7 +162,7 @@
             <dt class="optional">msg.filemode
                 <span class="property-type">string</span>
             </dt>
-            <dd>Overrides the File Mode defined in node editor.</dd>
+            <dd>Overrides the File Mode defined in node editor. Possible file modes: "0", "1" and "2".</dd>
             <dt class="optional">msg.filename
                 <span class="property-type">string</span>
             </dt>
@@ -207,7 +208,32 @@
         <p>Brightness ajusts the brightness of the camera as an number from 0 to 100 (default 50).</p>
         <p>Contrast sets the contrast level as an number from -100 to 100 (default 0).</p>
         <p>Sharpness adjusts the sharpness of the camera, a measure of the amount of post-processing to reduce or increase image sharpness. Ranges from -100 to 100 (default 0).</p>
-        <p>Image Effect</p>
+        <p>Image Effect defines the effect to by applied to the image. The following effects are defined, although not all of them are fully supported by every camera module:
+            <ul>
+                <li>none: no effect (default)</li>
+                <li>negative: invert the image colours</li>
+                <li>solarise: solarise the image</li>
+                <li>posterise: posterise the image</li>
+                <li>whiteboard: whiteboard effect</li>
+                <li>blackboard: blackboard effect</li>
+                <li>sketch: sketch effect</li>
+                <li>denoise: denoise the image</li>
+                <li>emboss: emboss the image</li>
+                <li>oilpaint: oil paint effect</li>
+                <li>hatch: hatch sketch effect</li>
+                <li>gpen: graphite sketch effect</li>
+                <li>pastel: pastel effect</li>
+                <li>watercolour: watercolour effect</li>
+                <li>film: film grain effect</li>
+                <li>blur: blur the image</li>
+                <li>saturation: colour saturate the image</li>
+                <li>colourswap: not fully implemented</li>
+                <li>washedout: not fully implemented</li>
+                <li>colourpoint: not fully implemented</li>
+                <li>colourbalance: not fully implemented</li>
+                <li>cartoon: not fully implemented</li>
+            </ul>
+        </p>
         <p>Wait for AGC is the delay between camera initialization and shooting. Proper wait time is important to let the camera sensors adapt to the scene and set correct exposure (default 0.3s).</p>
         <p>Quality is used to control JPEG compression (from 0 - low quality and high compression; to 100 - high quality and no compression). Quality is ignored by all other image formats but JPEG (default 80).</p>
         <p>LED controls the state of the camera's LED via GPIO - "1" On and "0" Off (default "On"). At the present moment, the camera's LED cannot be controlled on the Pi 3, which had GPIOs re-routed to the GPIO expander, but it's typically used on the Compute Module platform.</p>
