@@ -22,25 +22,25 @@
     <div class="form-row node-input-filemode">
          <label for="node-input-filemode"><i class="fa fa-file-image-o"></i> <span data-i18n="camerapi.label.filemode"></span></label>
 	     <select id="node-input-filemode">
-            <option value="2">Generate</option>
-            <option value="1">Filemode</option>
-            <option value="0">Buffermode</option>
+            <option value="2" data-i18n="camerapi.options.generate"></option>
+            <option value="1" data-i18n="camerapi.options.filemode"></option>
+            <option value="0" data-i18n="camerapi.options.buffermode"></option>
         </select>
     </div>
     <div id="filename" class="form-row node-input-filename">
          <label for="node-input-filename"><i class="fa fa-tag"></i> <span data-i18n="camerapi.label.filename"></span></label>
-		<input type="text" id="node-input-filename" placeholder="Filename with extension">
+		<input type="text" id="node-input-filename" data-i18n="[placeholder]camerapi.placeholder.filename">
     </div>
     <div id="filedefpath" class="form-row node-input-filedefpath">
          <label for="node-input-filedefpath"><i class="fa fa-folder"></i> <span data-i18n="camerapi.label.filedefpath"></span></label>
 	     <select id="node-input-filedefpath">
-            <option value="1">Yes</option>
-            <option value="0">No</option>
+            <option value="1" data-i18n="camerapi.options.yes"></option>
+            <option value="0" data-i18n="camerapi.options.no"></option>
         </select>
     </div>
     <div id="filepath" class="form-row node-input-filepath">
          <label for="node-input-filepath"><i class="fa fa-folder"></i> <span data-i18n="camerapi.label.filepath"></span></label>
-		<input type="text" id="node-input-filepath" placeholder="full filepath">
+		<input type="text" id="node-input-filepath" data-i18n="[placeholder]camerapi.placeholder.filepath">
     </div>
     <div id="fileformat" class="form-row node-input-fileformat">
          <label for="node-input-fileformat"><i class="fa fa-file-image-o"></i> <span data-i18n="camerapi.label.fileformat"></span></label>
@@ -69,7 +69,7 @@
     </div>
     <div class="form-row node-input-rotation">
          <label for="node-input-rotation"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.rotation"></span></label>
-	     <select id="node-input-rotation">
+	     <select style="width: 80px" id="node-input-rotation">
             <option value="0">0</option>
             <option value="90">90</option>
             <option value="180">180</option>
@@ -77,34 +77,34 @@
 		</select>
     </div>
     <div id="flip" class="form-row flip-row">
-        <label for="node-input-fliph"><i class="fa fa-repeat"></i> Flip Picture</label>
+        <label for="node-input-fliph"><i class="fa fa-repeat"></i> Flip Picture: hflip</label>
         <select style="width: 80px" id="node-input-fliph">
-            <option value="0">No</option>
-            <option value="1">Yes</option>
+            <option value="0" data-i18n="camerapi.options.no"></option>
+            <option value="1" data-i18n="camerapi.options.yes"></option>
         </select>
+        <label for="node-input-flipv"> vflip</label>
         <select style="width: 80px" id="node-input-flipv">
-            <option value="0">No</option>
-            <option value="1">Yes</option>
+            <option value="0" data-i18n="camerapi.options.no"></option>
+            <option value="1" data-i18n="camerapi.options.yes"></option>
         </select>
     </div>
     <div class="form-row node-input-brightness">
-         <label for="node-input-brightness"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.brightness"></span></label>
-		 <input type="text" id="node-input-brightness" placeholder="0 to 100" >
-    </div>
-    <div class="form-row node-input-contrast">
-         <label for="node-input-contrast"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.contrast"></span></label>
-		 <input type="text" id="node-input-contrast" placeholder="-100 to 100" >
+        <label for="node-input-brightness"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.brightness"></span></label>
+		<input type="text" style="width: 80px" id="node-input-brightness" data-i18n="[placeholder]camerapi.placeholder.brightness">
+        <label for="node-input-contrast"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.contrast"></span></label>
+		<input type="text" style="width: 80px" id="node-input-contrast" data-i18n="[placeholder]camerapi.placeholder.contrast">
     </div>
     <div class="form-row node-input-sharpness">
-         <label for="node-input-sharpness"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.sharpness"></span></label>
-		 <input type="text" id="node-input-sharpness" placeholder="-100 to 100" >
-    </div>
-    <div class="form-row node-input-imageeffect">
-         <label for="node-input-imageeffect"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.imageeffect"></span></label>
-         <select id="node-input-imageeffect">
+        <label for="node-input-sharpness"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.sharpness"></span></label>
+		<input type="text" style="width: 80px" id="node-input-sharpness" data-i18n="[placeholder]camerapi.placeholder.sharpness" >
+        <label for="node-input-quality"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.quality"></span></label>
+        <input type="text" style="width: 80px" id="node-input-quality" data-i18n="[placeholder]camerapi.placeholder.quality" >
+   </div>
+   <div class="form-row node-input-imageeffect">
+        <label for="node-input-imageeffect"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.imageeffect"></span></label>
+        <select id="node-input-imageeffect">
             <option value="none">none</option>
             <option value="negative">negative</option>
-            <option value="solarize">solarize</option>
             <option value="sketch">sketch</option>
             <option value="denoise">denoise</option>
             <option value="emboss">emboss</option>
@@ -112,37 +112,26 @@
             <option value="hatch">hatch</option>
             <option value="gpen">gpen</option>
             <option value="pastel">pastel</option>
-            <option value="watercolor">watercolor</option>
-            <option value="blur">blur</option>
             <option value="saturation">saturation</option>
-            <option value="colorswap">colorswap</option>
             <option value="washedout">washedout</option>
-            <option value="posterise">posterise</option>
-            <option value="colorpoint">colorpoint</option>
-            <option value="colorbalance">colorbalance</option>
             <option value="cartoon">cartoon</option>
             <option value="deinterlace1">deinterlace1</option>
             <option value="deinterlace2">deinterlace2</option>
         </select>
     </div>
     <div class="form-row node-input-agcwait">
-         <label for="node-input-agcwait"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.agcwait"></span></label>
-		 <input type="text" id="node-input-agcwait" placeholder="0.0 to 1.0" >
-    </div>
-    <div class="form-row node-input-quality">
-         <label for="node-input-quality"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.quality"></span></label>
-		 <input type="text" id="node-input-quality" placeholder="80" >
-    </div>
-    <div class="form-row node-input-led">
-         <label for="node-input-led"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.led"></span></label>
-	 <select id="node-input-led">
-            <option value="1">On</option>
-            <option value="0">Off</option>
+        <label for="node-input-agcwait"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.agcwait"></span></label>
+		<input type="text" style="width: 80px" id="node-input-agcwait" placeholder="0.0 to 1.0" >
+        <label for="node-input-led"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.led"></span></label>
+	    <select style="width: 80px" id="node-input-led">
+            <option value="1" data-i18n="camerapi.options.on"></option>
+            <option value="0" data-i18n="camerapi.options.off"></option>
 	</select>
     </div>
+    </br>
     <div class="form-row node-input-name">
         <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="camerapi.label.name"></span></label>
-        <input type="text" id="node-input-name" placeholder="Take photo node">
+        <input type="text" id="node-input-name" data-i18n="[placeholder]camerapi.placeholder.name">
     </div>
 </script>
 
@@ -176,9 +165,9 @@
             brightness: {value:"50", required:true},
             contrast: {value:"0", required:true},
             sharpness: {value:"0", required:true},
+            quality: {value:"80", required:false},
             imageeffect: {value:"none", required:true},
             agcwait: {value:"0.3", required:false},
-            quality: {value:"80", required:false},
             led: {value:"1", required:false},
             name: {value:""}
         },
@@ -227,7 +216,7 @@
             });
         },
         label: function() {
-            return this.name || "take photo python node";
+            return this.name || "take photo node";
         }
     });
 </script>

@@ -26,7 +26,25 @@
             "name" : "Name",
             "none" : "none"
         },
-       "errors" : {
+        "options" : {
+            "generate" : "Generate File",
+            "filemode" : "File Mode",
+            "buffermode" : "Buffer Mode",
+            "yes" : "Yes",
+            "no" : "No",
+            "on" : "On",
+            "off" : "Off"
+        }, 
+        "placeholder" : {
+            "filename" : "Filename with extension",
+            "filepath" : "Full filepath",
+            "brightness" : "0 to 100",
+            "contrast" : "-100 to 100",
+            "sharpness" : "-100 to 100",
+            "quality" : "80",
+            "name" : "Take photo node"
+        },
+        "errors" : {
         }
     }
 }
