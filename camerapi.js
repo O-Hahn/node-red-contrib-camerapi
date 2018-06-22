@@ -46,6 +46,8 @@ module.exports = function(RED) {
 		this.brightness = config.brightness;
 		this.contrast = config.contrast;
 		this.imageeffect = config.imageeffect;
+		this.exposuremode = config.exposuremode;
+		this.iso = config.iso;
 		this.agcwait = config.agcwait;
 		this.quality = config.quality;
 		this.led = config.led;
@@ -81,6 +83,8 @@ module.exports = function(RED) {
 			var quality;
 			var led;
 			var rotation;
+			var exposuremode;
+			var iso;
 
 			node.status({fill:"green",shape:"dot",text:"connected"});
 
@@ -260,6 +264,30 @@ module.exports = function(RED) {
 					}
 				}
 			cl += " " + imageeffect;
+
+			// exposure-mode
+			if ((msg.exposuremode) && (msg.exposuremode !== "")) {
+				exposuremode = msg.exposuremode;
+				} else {
+					if (node.exposuremode) {
+						exposuremode = node.exposuremode;
+					} else {
+						exposuremode = "auto";					
+					}
+				}
+			cl += " " + exposuremode;
+
+			// iso
+			if ((msg.iso) && (msg.iso !== "")) {
+				iso = msg.iso;
+				} else {
+					if (node.iso) {
+						iso = node.iso;
+					} else {
+						iso = "auto";					
+					}
+				}
+			cl += " " + iso;
 
 			// agcwait
 			if ((msg.agcwait) && (msg.agcwait !== "")) {

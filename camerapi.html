@@ -69,7 +69,7 @@
     </div>
     <div class="form-row node-input-rotation">
          <label for="node-input-rotation"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.rotation"></span></label>
-	     <select style="width: 80px" id="node-input-rotation">
+	     <select style="width: 100px" id="node-input-rotation">
             <option value="0">0</option>
             <option value="90">90</option>
             <option value="180">180</option>
@@ -78,27 +78,27 @@
     </div>
     <div id="flip" class="form-row flip-row">
         <label for="node-input-fliph"><i class="fa fa-repeat"></i> Flip Picture: hflip</label>
-        <select style="width: 80px" id="node-input-fliph">
+        <select style="width: 100px" id="node-input-fliph">
             <option value="0" data-i18n="camerapi.options.no"></option>
             <option value="1" data-i18n="camerapi.options.yes"></option>
         </select>
         <label for="node-input-flipv"> vflip</label>
-        <select style="width: 80px" id="node-input-flipv">
+        <select style="width: 100px" id="node-input-flipv">
             <option value="0" data-i18n="camerapi.options.no"></option>
             <option value="1" data-i18n="camerapi.options.yes"></option>
         </select>
     </div>
     <div class="form-row node-input-brightness">
         <label for="node-input-brightness"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.brightness"></span></label>
-		<input type="text" style="width: 80px" id="node-input-brightness" data-i18n="[placeholder]camerapi.placeholder.brightness">
+		<input type="text" style="width: 100px" id="node-input-brightness" data-i18n="[placeholder]camerapi.placeholder.brightness">
         <label for="node-input-contrast"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.contrast"></span></label>
-		<input type="text" style="width: 80px" id="node-input-contrast" data-i18n="[placeholder]camerapi.placeholder.contrast">
+		<input type="text" style="width: 100px" id="node-input-contrast" data-i18n="[placeholder]camerapi.placeholder.contrast">
     </div>
     <div class="form-row node-input-sharpness">
         <label for="node-input-sharpness"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.sharpness"></span></label>
-		<input type="text" style="width: 80px" id="node-input-sharpness" data-i18n="[placeholder]camerapi.placeholder.sharpness" >
+		<input type="text" style="width: 100px" id="node-input-sharpness" data-i18n="[placeholder]camerapi.placeholder.sharpness" >
         <label for="node-input-quality"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.quality"></span></label>
-        <input type="text" style="width: 80px" id="node-input-quality" data-i18n="[placeholder]camerapi.placeholder.quality" >
+        <input type="text" style="width: 100px" id="node-input-quality" data-i18n="[placeholder]camerapi.placeholder.quality" >
    </div>
    <div class="form-row node-input-imageeffect">
         <label for="node-input-imageeffect"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.imageeffect"></span></label>
@@ -119,15 +119,45 @@
             <option value="deinterlace2">deinterlace2</option>
         </select>
     </div>
+    <div class="form-row node-input-exposuremode">
+        <label for="node-input-exposuremode"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.exposuremode"></span></label>
+        <select id="node-input-exposuremode" style="width: 100px" >
+            <option value="auto">auto</option>
+            <option value="night">night</option>
+            <option value="nightpreview">nightpreview</option>
+            <option value="backlight">backlight</option>
+            <option value="spotlight">spotlight</option>
+            <option value="sports">spots</option>
+            <option value="snow">snow</option>
+            <option value="beach">beach</option>
+            <option value="verylong">verylong</option>
+            <option value="fixedfps">fixedfps</option>
+            <option value="antishake">antishake</option>
+            <option value="fireworks">fireworks</option>
+            <option value="off">off</option>
+        </select>
+        <label for="node-input-iso"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.iso"></span></label>
+        <select id="node-input-iso" style="width: 100px" >
+            <option value="0">auto</option>
+            <option value="100">100</option>
+            <option value="200">200</option>
+            <option value="320">320</option>
+            <option value="400">400</option>
+            <option value="500">500</option>
+            <option value="640">640</option>
+            <option value="800">800</option>
+        </select>
+    </div>
     <div class="form-row node-input-agcwait">
         <label for="node-input-agcwait"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.agcwait"></span></label>
-		<input type="text" style="width: 80px" id="node-input-agcwait" placeholder="0.0 to 1.0" >
+		<input type="text" style="width: 100px" id="node-input-agcwait" placeholder="0.0 to 1.0" >
         <label for="node-input-led"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.led"></span></label>
-	    <select style="width: 80px" id="node-input-led">
+	    <select style="width: 100px" id="node-input-led">
             <option value="1" data-i18n="camerapi.options.on"></option>
             <option value="0" data-i18n="camerapi.options.off"></option>
 	</select>
     </div>
+    
     </br>
     <div class="form-row node-input-name">
         <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="camerapi.label.name"></span></label>
@@ -167,6 +197,8 @@
             sharpness: {value:"0", required:true},
             quality: {value:"80", required:false},
             imageeffect: {value:"none", required:true},
+            exposuremode: {value:"auto", required:true}, 
+            iso: {value:"0", required:true},
             agcwait: {value:"0.3", required:false},
             led: {value:"1", required:false},
             name: {value:""}

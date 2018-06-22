@@ -14,6 +14,8 @@
             "contrast" : "Contrast",
             "sharpness" : "Sharpness",
             "imageeffect" : "Image Effect",
+            "exposuremode" : "Exposure Mode",
+            "iso" : "ISO",
             "agcwait" : "Wait for AGC",
             "quality" : "Quality",
             "led" : "LED",
