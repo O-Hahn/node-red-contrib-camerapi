@@ -51,6 +51,7 @@ module.exports = function(RED) {
 		this.agcwait = config.agcwait;
 		this.quality = config.quality;
 		this.led = config.led;
+		this.awb = config.awb;
 		this.name =  config.name;
 		this.activeProcesses = {};
 
@@ -82,6 +83,7 @@ module.exports = function(RED) {
 			var agcwait;
 			var quality;
 			var led;
+			var awb;
 			var rotation;
 			var exposuremode;
 			var iso;
@@ -100,7 +102,7 @@ module.exports = function(RED) {
 			}
 
 			if (filemode == "0") {
-				// Buffermode
+				// Buffered mode (old Buffermode)
 				filename = "pic_" + uuid + ".jpg";
 				fileformat = "jpeg";
 				filepath = homedir + "/";
@@ -110,7 +112,7 @@ module.exports = function(RED) {
 
 				cl += " " + filename + " " + filepath + " " + fileformat;
 			} else if (filemode == "2") {
-				// Generate
+				// Auto file name mode (old Generate)
 				filename = "pic_" + uuid + ".jpg";
 				fileformat = "jpeg";
 				filepath = defdir;
@@ -163,13 +165,13 @@ module.exports = function(RED) {
 			// Resulution of the image
 			if ((msg.resolution) && (msg.resolution !== "")) {
 				resolution = msg.resolution;
+			} else {
+				if (node.resolution) {
+					resolution = node.resolution;
 				} else {
-					if (node.resolution) {
-						resolution = node.resolution;
-					} else {
-						resolution = "1";	
-					}
+					resolution = "10";	
 				}
+			}
 			if (resolution == "1") {
 				cl += " 320 240";
 			} else if (resolution == "2" ) {
@@ -178,10 +180,18 @@ module.exports = function(RED) {
 				cl += " 800 600";
 			} else if (resolution == "4" ) {
 				cl += " 1024 768";
-			} else if (resolution == "5" ) {
+			} else if (resolution == "5") {
+				cl += " 1280 720";
+			} else if (resolution == "6") {
+				cl += " 1640 922";
+			} else if (resolution == "7") {
+				cl += " 1640 1232";
+			} else if (resolution == "8" ) {
 				cl += " 1920 1080";
-			} else  {
+			} else if (resolution == "9") {
 				cl += " 2592 1944";
+			} else {
+				cl += " 3280 2464";
 			}
 
 			// rotation
@@ -199,70 +209,70 @@ module.exports = function(RED) {
 			// hflip and vflip
 			if ((msg.fliph) && (msg.fliph !== "")) {
 				fliph = msg.fliph;
+			} else {
+				if (node.fliph) {
+					fliph = node.fliph;
 				} else {
-					if (node.fliph) {
-						fliph = node.fliph;
-					} else {
-						fliph = "1";	
-					}
+					fliph = "1";	
 				}
+			}
 			if ((msg.flipv) && (msg.flipv !== "")) {
 				flipv = msg.flipv;
+			} else {
+				if (node.flipv) {
+					flipv = node.flipv;
 				} else {
-					if (node.flipv) {
-						flipv = node.flipv;
-					} else {
-						flipv= "1";	
-					}
+					flipv= "1";	
 				}
+			}
 			cl += " " + fliph + " " + flipv;
 
 			// brightness
 			if ((msg.brightness) && (msg.brightness !== "")) {
 				brightness = msg.brightness;
+			} else {
+				if (node.brightness) {
+					brightness = node.brightness;
 				} else {
-					if (node.brightness) {
-						brightness = node.brightness;
-					} else {
-						brightness = "50";	
-					}
+					brightness = "50";	
 				}
+			}
 			cl += " " + brightness;
 
 			// contrast
 			if ((msg.contrast) && (msg.contrast !== "")) {
 				contrast = msg.contrast;
+			} else {
+				if (node.contrast) {
+					contrast = node.contrast;
 				} else {
-					if (node.contrast) {
-						contrast = node.contrast;
-					} else {
-						contrast = "0";	
-					}
+					contrast = "0";	
 				}
+			}
 			cl += " " + contrast;
 
 			// sharpness
 			if ((msg.sharpness) && (msg.sharpness !== "")) {
 				sharpness = msg.sharpness;
+			} else {
+				if (node.sharpness) {
+					sharpness = node.sharpness;
 				} else {
-					if (node.sharpness) {
-						sharpness = node.sharpness;
-					} else {
-						sharpness = "0";	
-					}
+					sharpness = "0";	
 				}
+			}
 			cl += " " + sharpness;
 
 			// imageeffect
 			if ((msg.imageeffect) && (msg.imageeffect !== "")) {
 				imageeffect = msg.imageeffect;
+			} else {
+				if (node.imageeffect) {
+					imageeffect = node.imageeffect;
 				} else {
-					if (node.imageeffect) {
-						imageeffect = node.imageeffect;
-					} else {
-						imageeffect = "none";	
-					}
+					imageeffect = "none";	
 				}
+			}
 			cl += " " + imageeffect;
 
 			// exposure-mode
@@ -280,50 +290,62 @@ module.exports = function(RED) {
 			// iso
 			if ((msg.iso) && (msg.iso !== "")) {
 				iso = msg.iso;
+			} else {
+				if (node.iso) {
+					iso = node.iso;
 				} else {
-					if (node.iso) {
-						iso = node.iso;
-					} else {
-						iso = "auto";					
-					}
+					iso = "0";					
 				}
+			}
 			cl += " " + iso;
 
 			// agcwait
 			if ((msg.agcwait) && (msg.agcwait !== "")) {
 				agcwait = msg.agcwait;
+			} else {
+				if (node.agcwait) {
+					agcwait = node.agcwait;
 				} else {
-					if (node.agcwait) {
-						agcwait = node.agcwait;
-					} else {
-						agcwait = 0.3;					
-					}
+					agcwait = 1.0;					
 				}
+			}
 			cl += " " + agcwait;
 			
 			// jpeg quality
 			if ((msg.quality) && (msg.quality !== "")) {
 				quality = msg.quality;
+			} else {
+				if (node.quality) {
+					quality = node.quality;
 				} else {
-					if (node.quality) {
-						quality = node.quality;
-					} else {
-						quality = 80;					
-					}
+					quality = 80;					
 				}
+			}
 			cl += " " + quality;
 			
 			// led on/off
 			if ((msg.led) && (msg.led !== "")) {
 				led = msg.led;
+			} else {
+				if (node.led) {
+					led = node.led;
 				} else {
-					if (node.led) {
-						led = node.led;
-					} else {
-						led = 1;					
-					}
+					led = 0;					
 				}
+			}
 			cl += " " + led;
+
+			// awb
+			if ((msg.awb) && (msg.awb != "")) {
+				awb = msg.awb;
+			} else {
+				if (node.awb) {
+					awb = node.awb;
+				} else {
+					awb = "auto";
+				}
+			}
+			cl += " " + awb;
 
 			if (RED.settings.verbose) { node.log(cl); }
 
