@@ -147,6 +147,33 @@
              <option value="0">Off</option>
 	     </select>
     </div>
+    <div class="form-row node-input-iso">
+         <label for="node-input-iso"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.iso"></span></label>
+         <select id="node-input-iso">
+             <option value="0">auto</option>
+             <option value="100">100</option>
+             <option value="200">200</option>
+             <option value="320">320</option>
+             <option value="400">400</option>
+             <option value="500">500</option>
+             <option value="640">640</option>
+             <option value="800">800</option>
+         </select>
+    </div>
+    <div class="form-row node-input-awb">
+         <label for="node-input-awb"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.awb"></span></label>
+         <select id="node-input-awb">
+             <option value="auto">auto</option>
+             <option value="sunlight">sunlight</option>
+             <option value="cloudy">cloudy</option>
+             <option value="shade">shade</option>
+             <option value="tungsten">tungsten</option>
+             <option value="fluorescent">fluorescent</option>
+             <option value="incandescent">incandescent</option>
+             <option value="flash">flash</option>
+             <option value="horizon">horizon</option>
+         </select>
+    </div>
     <div class="form-row node-input-name">
         <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="camerapi.label.name"></span></label>
         <input type="text" id="node-input-name" placeholder="Take photo node">
@@ -236,7 +263,9 @@
         </p>
         <p>Wait for AGC is the delay between camera initialization and shooting. Proper wait time is important to let the camera sensors adapt to the scene and set correct exposure (default 0.3s).</p>
         <p>Quality is used to control JPEG compression (from 0 - low quality and high compression; to 100 - high quality and no compression). Quality is ignored by all other image formats but JPEG (default 80).</p>
-        <p>LED controls the state of the camera's LED via GPIO - "1" On and "0" Off (default "On"). At the present moment, the camera's LED cannot be controlled on the Pi 3, which had GPIOs re-routed to the GPIO expander, but it's typically used on the Compute Module platform.</p>
+        <p>LED controls the state of the camera's LED via GPIO - "1" On and "0" Off (default "Off"). At the present moment, the camera's LED cannot be controlled on the Pi 3, which had GPIOs re-routed to the GPIO expander, but it's typically used on the Compute Module platform.</p>
+        <p>ISO sets the apparent ISO setting of the camera (default auto). When set to auto, it will automatically determine a value according to image-taking conditions. When set to one of the ISO values, it will adjust the camera sensitivity accordingly.</p>
+        <p>AWB mode sets the auto-white-balance, which adjusts the colour balance used by the camera. When set to auto (default), it will try to correct the colours in the image depending on the light conditions of the scene, producing images with more neutral colours.</p>
 
     <h3>Reference</h3>
         <ul>
@@ -263,9 +292,11 @@
             contrast: {value:"0", required:true},
             sharpness: {value:"0", required:true},
             imageeffect: {value:"none", required:true},
-            agcwait: {value:"0.3", required:false},
+            agcwait: {value:"1.0", required:false},
             quality: {value:"80", required:false},
-            led: {value:"1", required:false},
+            led: {value:"0", required:false},
+            iso: {value:"0", required:false},
+            awb: {value:"auto", required:false},
             name: {value:""}
         },
         inputs:1,

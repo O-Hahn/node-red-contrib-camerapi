@@ -19,6 +19,8 @@ imageeffect = sys.argv[12]
 agcwait = float(sys.argv[13])
 quality = int(sys.argv[14])
 led = True if int(sys.argv[15]) == 1 else False
+iso = int(sys.argv[16])
+awb = sys.argv[17]
 
 # consider jpeg
 if fileFormat == "jpg":
@@ -59,6 +61,8 @@ with picamera.PiCamera() as camera:
         camera.contrast = contrast
         camera.image_effect = imageeffect
         camera.led = led
+        camera.iso = iso
+        camera.awb_mode = awb
         
         time.sleep(agcwait)
         

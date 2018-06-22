@@ -20,6 +20,8 @@
             "agcwait" : "Wait for AGC",
             "quality" : "Quality",
             "led" : "LED",
+            "iso": "ISO",
+            "awb": "AWB",
             "res1" : "320x240",
             "res2" : "640x480",
             "res3" : "800x600",

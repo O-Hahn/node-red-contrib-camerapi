@@ -49,6 +49,8 @@ module.exports = function(RED) {
 		this.agcwait = config.agcwait;
 		this.quality = config.quality;
 		this.led = config.led;
+		this.iso = config.iso;
+		this.awb = config.awb;
 		this.name =  config.name;
 		this.activeProcesses = {};
 
@@ -80,6 +82,8 @@ module.exports = function(RED) {
 			var agcwait;
 			var quality;
 			var led;
+			var iso;
+			var awb;
 			var rotation;
 
 			node.status({fill:"green",shape:"dot",text:"connected"});
@@ -276,7 +280,7 @@ module.exports = function(RED) {
 				if (node.agcwait) {
 					agcwait = node.agcwait;
 				} else {
-					agcwait = 0.3;					
+					agcwait = 1.0;					
 				}
 			}
 			cl += " " + agcwait;
@@ -300,10 +304,34 @@ module.exports = function(RED) {
 				if (node.led) {
 					led = node.led;
 				} else {
-					led = 1;					
+					led = 0;					
 				}
 			}
 			cl += " " + led;
+
+			// iso
+			if ((msg.iso) && (msg.iso !== "")) {
+				iso = msg.iso;
+			} else {
+				if (node.iso) {
+					iso = node.iso;
+				} else {
+					iso = 0;
+				}
+			}
+			cl += " " + iso;
+
+			// awb
+			if ((msg.awb) && (msg.awb != "")) {
+				awb = msg.awb;
+			} else {
+				if (node.awb) {
+					awb = node.awb;
+				} else {
+					awb = "auto";
+				}
+			}
+			cl += " " + awb;
 
 			if (RED.settings.verbose) { node.log(cl); }
 
