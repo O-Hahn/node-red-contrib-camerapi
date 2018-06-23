@@ -8,7 +8,8 @@
             "filemode" : "File Mode", 
             "resolution" : "Image Resolution", 
             "fileformat" : "File Format",
-            "filefqn" : "File Qualified Path and Name", 
+            "filefqn" : "File Qualified Path and Name",
+            "imageproperties": "Image Properties",
             "brightness" : "Brightness",
             "rotation" : "Rotation",
             "flip": "Image Flip",
@@ -17,7 +18,8 @@
             "contrast" : "Contrast",
             "sharpness" : "Sharpness",
             "imageeffect" : "Image Effect",
-            "exposuremode" : "Exposure Mode",
+            "presets": "Preset modes",
+            "exposuremode" : "Exposure",
             "iso" : "ISO",
             "agcwait" : "Wait for AGC",
             "quality" : "Quality",
@@ -34,7 +36,7 @@
             "none" : "none"
         },
         "options" : {
-            "auto" : "Auto File Name",
+            "automode" : "Auto File Name",
             "custommode" : "Custom File Name",
             "bufferedmode" : "Buffered Mode",
             "yes" : "Yes",

@@ -122,7 +122,7 @@ module.exports = function(RED) {
 
 				cl += " " + filename + " " + filepath + " " + fileformat;
 			} else {
-				 // Specified FileName
+				 // Specific FileName
 				 if ((msg.filename) && (msg.filename.trim() !== "")) {
 						filename = msg.filename;
 				} else {
@@ -162,7 +162,7 @@ module.exports = function(RED) {
 				if (RED.settings.verbose) { node.log("camerapi takephoto:" + filefqn); }
 			}
 
-			// Resulution of the image
+			// Resolution of the image
 			if ((msg.resolution) && (msg.resolution !== "")) {
 				resolution = msg.resolution;
 			} else {
