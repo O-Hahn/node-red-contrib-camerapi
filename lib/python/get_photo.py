@@ -17,10 +17,11 @@ contrast = int(sys.argv[10])
 sharpness = int(sys.argv[11])
 imageeffect = sys.argv[12]
 exposuremode = sys.argv[13]
-iso = sys.argv[14]
+iso = int(sys.argv[14])
 agcwait = float(sys.argv[15])
 quality = int(sys.argv[16])
 led = True if int(sys.argv[17]) == 1 else False
+awb = sys.argv[18]
 
 # consider jpeg
 if fileFormat == "jpg":
@@ -63,6 +64,7 @@ with picamera.PiCamera() as camera:
         camera.exposure_mode = exposuremode
         camera.iso = iso
         camera.led = led
+        camera.awb_mode = awb
         
         time.sleep(agcwait)
         

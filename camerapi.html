@@ -22,14 +22,14 @@
     <div class="form-row node-input-filemode">
          <label for="node-input-filemode"><i class="fa fa-file-image-o"></i> <span data-i18n="camerapi.label.filemode"></span></label>
 	     <select id="node-input-filemode">
-            <option value="2" data-i18n="camerapi.options.generate"></option>
-            <option value="1" data-i18n="camerapi.options.filemode"></option>
-            <option value="0" data-i18n="camerapi.options.buffermode"></option>
+            <option value="2" data-i18n="camerapi.options.automode"></option>
+            <option value="1" data-i18n="camerapi.options.custommode"></option>
+            <option value="0" data-i18n="camerapi.options.bufferedmode"></option>
         </select>
     </div>
     <div id="filename" class="form-row node-input-filename">
          <label for="node-input-filename"><i class="fa fa-tag"></i> <span data-i18n="camerapi.label.filename"></span></label>
-		<input type="text" id="node-input-filename" data-i18n="[placeholder]camerapi.placeholder.filename">
+		 <input type="text" id="node-input-filename" data-i18n="[placeholder]camerapi.placeholder.filename">
     </div>
     <div id="filedefpath" class="form-row node-input-filedefpath">
          <label for="node-input-filedefpath"><i class="fa fa-folder"></i> <span data-i18n="camerapi.label.filedefpath"></span></label>
@@ -40,7 +40,7 @@
     </div>
     <div id="filepath" class="form-row node-input-filepath">
          <label for="node-input-filepath"><i class="fa fa-folder"></i> <span data-i18n="camerapi.label.filepath"></span></label>
-		<input type="text" id="node-input-filepath" data-i18n="[placeholder]camerapi.placeholder.filepath">
+		 <input type="text" id="node-input-filepath" data-i18n="[placeholder]camerapi.placeholder.filepath">
     </div>
     <div id="fileformat" class="form-row node-input-fileformat">
          <label for="node-input-fileformat"><i class="fa fa-file-image-o"></i> <span data-i18n="camerapi.label.fileformat"></span></label>
@@ -58,13 +58,17 @@
     </div>
     <div class="form-row node-input-resolution">
          <label for="node-input-resolution"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.resolution"></span></label>
-	     <select id="node-input-resolution">
+	     <select id="node-input-resolution" value="10">
             <option value="1">320x240</option>
             <option value="2">640x480</option>
             <option value="3">800x600</option>
             <option value="4">1024x768</option>
-            <option value="5">1920x1080</option>
-            <option value="6">2592x1944</option>
+            <option value="5">1280x720</option>
+            <option value="6">1640x922</option>
+            <option value="7">1640x1232</option>
+            <option value="8">1920x1080</option>
+            <option value="9">2592x1944</option>
+            <option value="10">3280x2464 (v2 camera)</option>
 		</select>
     </div>
     <div class="form-row node-input-rotation">
@@ -77,29 +81,36 @@
 		</select>
     </div>
     <div id="flip" class="form-row flip-row">
-        <label for="node-input-fliph"><i class="fa fa-repeat"></i> Flip Picture: hflip</label>
-        <select style="width: 100px" id="node-input-fliph">
+        <label><i class="fa fa-repeat"></i> <span data-i18n="camerapi.label.flip"></span></label>
+        <label for="node-input-fliph" style="width: 80px;"><span data-i18n="camerapi.label.hflip"></span></label>
+        <select style="width: 60px" id="node-input-fliph">
             <option value="0" data-i18n="camerapi.options.no"></option>
             <option value="1" data-i18n="camerapi.options.yes"></option>
-        </select>
-        <label for="node-input-flipv"> vflip</label>
-        <select style="width: 100px" id="node-input-flipv">
+        </select>&nbsp;
+        <label for="node-input-flipv" style="width: 80px;"><span data-i18n="camerapi.label.vflip"></span></label>
+        <select style="width: 60px" id="node-input-flipv">
             <option value="0" data-i18n="camerapi.options.no"></option>
             <option value="1" data-i18n="camerapi.options.yes"></option>
         </select>
     </div>
-    <div class="form-row node-input-brightness">
-        <label for="node-input-brightness"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.brightness"></span></label>
-		<input type="text" style="width: 100px" id="node-input-brightness" data-i18n="[placeholder]camerapi.placeholder.brightness">
-        <label for="node-input-contrast"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.contrast"></span></label>
-		<input type="text" style="width: 100px" id="node-input-contrast" data-i18n="[placeholder]camerapi.placeholder.contrast">
+    <div class="form-row">
+        <label><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.imageproperties"></span></label>
+        
+        <label for="node-input-brightness" style="width: 80px;"><span data-i18n="camerapi.label.brightness"></span></label>
+        <input type="text" style="width: 60px" id="node-input-brightness" data-i18n="[placeholder]camerapi.placeholder.brightness">
+
+        &nbsp;<label for="node-input-contrast" style="width: 80px;"><span data-i18n="camerapi.label.contrast"></span></label>
+		<input type="text" style="width: 60px" id="node-input-contrast" data-i18n="[placeholder]camerapi.placeholder.contrast">
     </div>
-    <div class="form-row node-input-sharpness">
-        <label for="node-input-sharpness"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.sharpness"></span></label>
-		<input type="text" style="width: 100px" id="node-input-sharpness" data-i18n="[placeholder]camerapi.placeholder.sharpness" >
-        <label for="node-input-quality"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.quality"></span></label>
-        <input type="text" style="width: 100px" id="node-input-quality" data-i18n="[placeholder]camerapi.placeholder.quality" >
-   </div>
+    <div class="form-row">
+        <label></label>
+
+        <label for="node-input-sharpness" style="width: 80px;"><span data-i18n="camerapi.label.sharpness"></span></label>
+        <input type="text" style="width: 60px" id="node-input-sharpness" data-i18n="[placeholder]camerapi.placeholder.sharpness">
+
+        &nbsp;<label for="node-input-quality" style="width: 80px;"><span data-i18n="camerapi.label.quality"></span></label>
+        <input type="text" style="width: 60px" id="node-input-quality" data-i18n="[placeholder]camerapi.placeholder.quality">
+    </div>
    <div class="form-row node-input-imageeffect">
         <label for="node-input-imageeffect"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.imageeffect"></span></label>
         <select id="node-input-imageeffect">
@@ -112,6 +123,9 @@
             <option value="hatch">hatch</option>
             <option value="gpen">gpen</option>
             <option value="pastel">pastel</option>
+            <option value="watercolor">watercolor</option>
+            <option value="film">film</option>
+            <option value="blur">blur</option>
             <option value="saturation">saturation</option>
             <option value="washedout">washedout</option>
             <option value="cartoon">cartoon</option>
@@ -119,23 +133,7 @@
             <option value="deinterlace2">deinterlace2</option>
         </select>
     </div>
-    <div class="form-row node-input-exposuremode">
-        <label for="node-input-exposuremode"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.exposuremode"></span></label>
-        <select id="node-input-exposuremode" style="width: 100px" >
-            <option value="auto">auto</option>
-            <option value="night">night</option>
-            <option value="nightpreview">nightpreview</option>
-            <option value="backlight">backlight</option>
-            <option value="spotlight">spotlight</option>
-            <option value="sports">spots</option>
-            <option value="snow">snow</option>
-            <option value="beach">beach</option>
-            <option value="verylong">verylong</option>
-            <option value="fixedfps">fixedfps</option>
-            <option value="antishake">antishake</option>
-            <option value="fireworks">fireworks</option>
-            <option value="off">off</option>
-        </select>
+    <div class="form-row node-input-iso">
         <label for="node-input-iso"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.iso"></span></label>
         <select id="node-input-iso" style="width: 100px" >
             <option value="0">auto</option>
@@ -148,34 +146,153 @@
             <option value="800">800</option>
         </select>
     </div>
-    <div class="form-row node-input-agcwait">
+    <div class="form-row">
+        <label><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.presets"></span></label>
+
+        <label for="node-input-exposuremode" style="width: 80px;"><span data-i18n="camerapi.label.exposuremode"></span></label>
+        <select id="node-input-exposuremode" style="width: 212px;">
+            <option value="auto">auto</option>
+            <option value="night">night</option>
+            <option value="nightpreview">nightpreview</option>
+            <option value="backlight">backlight</option>
+            <option value="spotlight">spotlight</option>
+            <option value="sports">spots</option>
+            <option value="snow">snow</option>
+            <option value="beach">beach</option>
+            <option value="verylong">verylong</option>
+            <option value="fixedfps">fixedfps</option>
+            <option value="antishake">antishake</option>
+            <option value="fireworks">fireworks</option>
+            <!--option value="off">off</option>-->
+        </select>
+    </div>
+    <div class="form-row">
+        <label></label>
+
+        <label for="node-input-awb" style="width: 80px;"><span data-i18n="camerapi.label.awb"></span></label>
+         <select id="node-input-awb" style="width: 212px;">
+             <option value="auto">auto</option>
+             <option value="sunlight">sunlight</option>
+             <option value="cloudy">cloudy</option>
+             <option value="shade">shade</option>
+             <option value="tungsten">tungsten</option>
+             <option value="fluorescent">fluorescent</option>
+             <option value="incandescent">incandescent</option>
+             <option value="flash">flash</option>
+             <option value="horizon">horizon</option>
+         </select>
+    </div>
+    <div class="form-row">
         <label for="node-input-agcwait"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.agcwait"></span></label>
 		<input type="text" style="width: 100px" id="node-input-agcwait" placeholder="0.0 to 1.0" >
-        <label for="node-input-led"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.led"></span></label>
+ 
+        &nbsp;<label for="node-input-led" style="width: 60px; margin-left: 24px;"><i class="fa fa-camera"></i> <span data-i18n="camerapi.label.led"></span></label>
 	    <select style="width: 100px" id="node-input-led">
             <option value="1" data-i18n="camerapi.options.on"></option>
             <option value="0" data-i18n="camerapi.options.off"></option>
-	</select>
-    </div>
-    
+	   </select>
+    </div>  
     </br>
     <div class="form-row node-input-name">
         <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="camerapi.label.name"></span></label>
-        <input type="text" id="node-input-name" data-i18n="[placeholder]camerapi.placeholder.name">
+        <input type="text" id="node-input-name" data-i18n="[placeholder]camerapi.placeholder.name" style="width: 296px;">
     </div>
 </script>
 
 <script type="text/x-red" data-help-name="camerapi-takephoto">
-    <p>If the Camera Pi Node for the Raspberry Pi Camera is triggered - it will take a photo with the given resolution and format. </p>
-	<p>The Filemode (as "2" for gernerate Filename - "1" for set filename or "0" for no file and buffer mode) or filled in <b>msg.filemode</b> indicates if the picture is taken and put into a file or into <b>msg.payload</b> as an raw image. </p>
-    <p>You could override with <b>msg.filename</b> the filename, with <b>msg.filepath</b> the filepath and <b>msg.fileformat</b> with the fileformat.</p>
-	<p> </p>
-	<p>The node returns in the filemode="1" or "2" <b>msg.payload</b> with the full qualified filepath and filename to the photo stored in a file with extension. </p>
-    <p>Otherwise the <b>msg.payload</b> will contain the photo as an binary object. </p>
-    <p>As default directory you should have a <b>/home/pi/Pictures</b> filedirectory to use <b>msg.filedefpath=0</b> </p>
-    <p>To ensure correct exposure, a delay is required between instantiating the camera and taking the picture - set how long you want this delay to be with the agcwait parameter (default 0.3s).</p>
-    <p>If the image format is set to "JPEG", the "quality" parameter can be used to control the amount of JPEG compression applied (0-100, with 100 resulting in the least compression). If not specified, quality defaults to 80. This parameter is ignored for other image formats.</p>
-    <p>The camera LED can be controlled with the "LED" parameter. When set to "On" (1, default), the camera's LED will be activated during the capture.</p>
+    <p>Takes picture using the Raspberry Pi camera module.</p>
+    <p>Requires a Raspberry Pi camera module and picamera Python library</p>
+
+    <h3>Inputs</h3>
+        <dl class="message-properties">
+            <dt class="optional">msg.filemode
+                <span class="property-type">string</span>
+            </dt>
+            <dd>Overrides the File Mode defined in node editor. Possible file modes: "0", "1" and "2".</dd>
+            <dt class="optional">msg.filename
+                <span class="property-type">string</span>
+            </dt>
+            <dd>Overrides the File Name defined in node editor.</dd>
+            <dt class="optional">msg.filepath
+                <span class="property-type">string</span>
+            </dt>
+            <dd>Overrides the File Path defined in node editor.</dd>
+            <dt class="optional">msg.fileformat
+                <span class="property-type">string</span>
+            </dt>
+            <dd>Overrides the File Format defined in node editor.</dd>
+        </dl>
+
+    <h3>Outputs</h3>
+        <ol class="node-ports">
+            <li>Standard output
+                <dl class="message-properties">
+                    <dt>payload <span class="property-type">string</span></dt>
+                    <dd>
+                        <p>For filemode "0" (buffered mode), payload contains the raw image as a binary object.</p>
+                        <p>For filemode "1" (custom file name) and "2" (auto file name), payload contains the fully qualified file name of the file containing the image.</p>
+                    </dd>
+                </dl>
+            </li>
+        </ol>
+
+    <h3>Details</h3>
+        <p>File Mode indicates the operation mode, which can be:
+            <ol type = "1" start = "0">
+                <li>Buffered mode - the raw image will be sent to the next node(s) in <code>msg.payload</code></li>
+                <li>Custom file name - the image will be stored in a file with the specified file name.</li>
+                <li>Auto file name - the image will be stored in a file and its name automatically generated.</li>
+            </ol>
+        </p>
+        <p>File Name defines the name of the file in which the node will save the photo, if File Mode is "Custom file name".</p>
+        <p>File Default Path, when set to Yes (<code>msg.filedefpath = "1"</code>), will save all photos in the default folder (~/Pictures), therefore, make sure the directory is created and node-red process has permission to write files in the folder.</p>
+        <p>File Path specifies the path where photos are saved, when File Default Path is No (<code>msg.filedefpath = "0")</code>).</p>
+        <p>File Format defines the format of the file. The following formats are supported: JPEG (default), PNG, GIF, BMP, YUV, RGB, RGBA, BGR, BGRA.</p>
+        <p>Resolution, the image resolution in pixels.</p>
+        <p>Rotation, rotates the image (in degrees).</p>
+        <p>Image Flip, flips image horizontally and vertically, independently.</p>
+        <p>Brightness ajusts the brightness of the camera as an number from 0 to 100 (default 50).</p>
+        <p>Contrast sets the contrast level as an number from -100 to 100 (default 0).</p>
+        <p>Sharpness adjusts the sharpness of the camera, a measure of the amount of post-processing to reduce or increase image sharpness. Ranges from -100 to 100 (default 0).</p>
+        <p>Quality is used to control JPEG compression (from 0 - low quality and high compression; to 100 - high quality and no compression). Quality is ignored by all other image formats but JPEG (default 80).</p>
+        <p>Image Effect defines the effect to by applied to the image. The following effects are defined, although not all of them are fully supported by every camera module:
+            <ul>
+                <li>none: no effect (default)</li>
+                <li>negative: invert the image colours</li>
+                <li>solarise: solarise the image</li>
+                <li>posterise: posterise the image</li>
+                <li>whiteboard: whiteboard effect</li>
+                <li>blackboard: blackboard effect</li>
+                <li>sketch: sketch effect</li>
+                <li>denoise: denoise the image</li>
+                <li>emboss: emboss the image</li>
+                <li>oilpaint: oil paint effect</li>
+                <li>hatch: hatch sketch effect</li>
+                <li>gpen: graphite sketch effect</li>
+                <li>pastel: pastel effect</li>
+                <li>watercolour: watercolour effect</li>
+                <li>film: film grain effect</li>
+                <li>blur: blur the image</li>
+                <li>saturation: colour saturate the image</li>
+                <li>colourswap: not fully implemented</li>
+                <li>washedout: not fully implemented</li>
+                <li>colourpoint: not fully implemented</li>
+                <li>colourbalance: not fully implemented</li>
+                <li>cartoon: not fully implemented</li>
+            </ul>
+        </p>
+        <p>ISO sets the apparent ISO setting of the camera (default auto). When set to auto, it will automatically determine a value according to image-taking conditions. When set to one of the ISO values, it will adjust the camera sensitivity accordingly.</p>
+        <p>Exposure mode, adjusts camera exposure mode with one of the presets, thus pre-defining the camera's sensitivity, speed and gain.</p>
+        <p>AWB mode sets the auto-white-balance, which adjusts the colour balance used by the camera. When set to auto (default), it will try to correct the colours in the image depending on the light conditions of the scene, producing images with more neutral colours.</p>
+        <p>Wait for AGC is the delay between camera initialization and shooting. Proper wait time is important to let the camera sensors adapt to the scene and set correct exposure (default 0.3s).</p>
+        <p>LED controls the state of the camera's LED via GPIO - "1" On and "0" Off (default "Off"). At the present moment, the camera's LED cannot be controlled on the Pi 3, which had GPIOs re-routed to the GPIO expander, but it's typically used on the Compute Module platform.</p>
+        
+
+    <h3>Reference</h3>
+        <ul>
+            <li><a href="https://www.raspberrypi.org/documentation/hardware/camera/README.md" target="_blank">Camera module v2</a></li>
+            <li><a href="https://picamera.readthedocs.io/en/release-1.13/index.html" target="_blank">picamera</a></li>
+        </ul>
 </script>
 
 <script type="text/javascript">
@@ -188,7 +305,7 @@
             filedefpath: {value:"1", required:true},
             filepath: {value:"", required:false},
             fileformat: {value:"jpeg", required:true},
-            resolution: {value:"1", required:true},
+            resolution: {value:"10", required:true},
             rotation : {value:"0", required:true},
             fliph: {value:"0", required:true},
             flipv: {value:"0", required:true},
@@ -199,8 +316,9 @@
             imageeffect: {value:"none", required:true},
             exposuremode: {value:"auto", required:true}, 
             iso: {value:"0", required:true},
-            agcwait: {value:"0.3", required:false},
-            led: {value:"1", required:false},
+            agcwait: {value:"1.0", required:false},
+            led: {value:"0", required:false},
+            awb: {value:"auto", required:false},
             name: {value:""}
         },
         inputs:1,
