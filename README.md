@@ -20,7 +20,7 @@ First you have to install a Raspberry Pi Camera physically and don't forget to e
 If you are using the default path during the fileoption set - the path /home/pi/Pictures will be used.
 
 ### Runtime information
-This node is tested on RASPBIAN, Nodejs V6.x LTS and NPM 3.x on Node-Red 0.18. 
+This node is tested on RASPBIAN (buster), Nodejs V12.x LTS and NPM 6.x on Node-Red 1.0.6 
 
 ## Usage
 

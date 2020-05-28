@@ -62,7 +62,7 @@ module.exports = function(RED) {
 
 			var fsextra = require("fs-extra");
 			var fs = require("fs");
-			var uuidv4 = require("uuid/v4");
+			const { v4: uuidv4 } = require('uuid');
 			var uuid = uuidv4();
 			var os = require("os");
 			var localdir = __dirname;
