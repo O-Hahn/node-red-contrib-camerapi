@@ -70,8 +70,10 @@ with picamera.PiCamera() as camera:
         
         if i_format == "jpeg":
             camera.capture(picfile, i_format, quality=quality)
+            camera.close()
         else:
-            camera.capture(picfile, i_format)
+            camera.capture(picfile, i_format, use_video_port=True)
+            camera.close()
             
 
 # flush the buffer
