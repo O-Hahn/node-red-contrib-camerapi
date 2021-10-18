@@ -68,7 +68,7 @@ module.exports = function(RED) {
 			var localdir = __dirname;
 			var homedir = os.homedir();
 			var defdir = homedir + "/Pictures/";
-			var cl = "python " + localdir + "/lib/python/get_photo.py";
+			var cl = "python3 " + localdir + "/lib/python/get_photo.py";
 			var resolution;
 			var fileformat;
 			var filename;

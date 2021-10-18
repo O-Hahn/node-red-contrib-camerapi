@@ -12,6 +12,7 @@
     "camerapi"
   ],
   "scripts": {
+    "preinstall": "pip3 install picamera",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
