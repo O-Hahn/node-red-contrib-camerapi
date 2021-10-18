@@ -190,6 +190,8 @@ module.exports = function(RED) {
 				cl += " 1920 1080";
 			} else if (resolution == "9") {
 				cl += " 2592 1944";
+			} else if (resolution == "11") {
+				cl += " 4056 3040";
 			} else {
 				cl += " 3280 2464";
 			}
